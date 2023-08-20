@@ -20,8 +20,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.054" />
-
-
+    
+    <!--todo names either in relative or linear layout-->
     <EditText
         android:id="@+id/player1"
         android:layout_width="wrap_content"

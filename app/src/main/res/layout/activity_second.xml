@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:orientation="vertical">
-
+<!--todo: text in center-->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/p00"
                 android:layout_width="100dp"
