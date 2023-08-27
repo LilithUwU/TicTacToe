@@ -12,8 +12,8 @@ class SecondActivity : AppCompatActivity() {
     private val binding by lazy {
         ActivitySecondBinding.inflate(layoutInflater)
     }
-    var player1Score = 0
-    var player2Score = 0
+    private var player1Score = 0
+    private var player2Score = 0
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,17 +31,17 @@ class SecondActivity : AppCompatActivity() {
         var count = 0
         var index = ""
         var sign = ""
-
-
         binding.hint.text = "$player1 it's your turn"
         val buttonClickListener = View.OnClickListener { view ->
             if (checkResultForTicTacToe(array, player1, player2).second)
                 disableAllButtons()
             /* sign = if (count % 2 == 0) "x"
              else "o"*/
-            if (count % 2 == 0) {
+            if (count % 2 == 0 && count != 8) {
                 sign = "x"
                 binding.hint.text = "$player2 it's your turn"
+            } else if (count == 8) {
+                binding.hint.text = "It's a draw"
             } else {
                 sign = "o"
                 binding.hint.text = "$player1 it's your turn"
@@ -137,21 +137,20 @@ class SecondActivity : AppCompatActivity() {
                 }
             }
         }
-        binding.p00.setOnClickListener(buttonClickListener)
-        binding.p01.setOnClickListener(buttonClickListener)
-        binding.p02.setOnClickListener(buttonClickListener)
-        binding.p10.setOnClickListener(buttonClickListener)
-        binding.p11.setOnClickListener(buttonClickListener)
-        binding.p12.setOnClickListener(buttonClickListener)
-        binding.p20.setOnClickListener(buttonClickListener)
-        binding.p21.setOnClickListener(buttonClickListener)
-        binding.p22.setOnClickListener(buttonClickListener)
-
+        setListeners(buttonClickListener)
         binding.backBtn.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("player1Score", player1Score)
-            intent.putExtra("player2Score", player2Score)
-            startActivity(intent)
+//            val intent = Intent(this, MainActivity::class.java)
+//            intent.putExtra("player1Score", player1Score)
+//            intent.putExtra("player2Score", player2Score)
+//            startActivity(intent)
+
+            val resultIntent = Intent(this, MainActivity::class.java)
+            resultIntent.putExtra("player1Score", player1Score)
+            resultIntent.putExtra("player2Score", player2Score)
+            resultIntent.putExtra("player1", player1)
+            resultIntent.putExtra("player2", player2)
+            setResult(100, resultIntent)
+            finish()
         }
     }
 
@@ -190,7 +189,6 @@ class SecondActivity : AppCompatActivity() {
                 }
             }
         }
-
         if (arr[0][0] == arr[1][1] && arr[1][1] == arr[2][2]) {
             if (arr[0][0] == "x") {
                 binding.hint.text = "$player1 won"
@@ -204,7 +202,6 @@ class SecondActivity : AppCompatActivity() {
                 return Pair(player2, true)
             }
         }
-
         if (arr[0][2] == arr[1][1] && arr[1][1] == arr[2][0]) {
             if (arr[0][2] == "x") {
                 player1Score++
@@ -217,11 +214,11 @@ class SecondActivity : AppCompatActivity() {
                 disableAllButtons()
                 return Pair(player2, true)
             }
-        }
-        return Pair("Draw", false)
+        } else return Pair("Draw", false)
+        return Pair("Error", false)
     }
 
-    fun disableAllButtons() {
+    private fun disableAllButtons() {
         binding.p00.isEnabled = false
         binding.p01.isEnabled = false
         binding.p02.isEnabled = false
@@ -232,6 +229,20 @@ class SecondActivity : AppCompatActivity() {
         binding.p21.isEnabled = false
         binding.p22.isEnabled = false
     }
+
+    private fun setListeners(buttonClickListener: View.OnClickListener) {
+        binding.p00.setOnClickListener(buttonClickListener)
+        binding.p01.setOnClickListener(buttonClickListener)
+        binding.p02.setOnClickListener(buttonClickListener)
+        binding.p10.setOnClickListener(buttonClickListener)
+        binding.p11.setOnClickListener(buttonClickListener)
+        binding.p12.setOnClickListener(buttonClickListener)
+        binding.p20.setOnClickListener(buttonClickListener)
+        binding.p21.setOnClickListener(buttonClickListener)
+        binding.p22.setOnClickListener(buttonClickListener)
+    }
+
+
 }
 
 
