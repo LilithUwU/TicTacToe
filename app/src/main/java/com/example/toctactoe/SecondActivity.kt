@@ -35,8 +35,6 @@ class SecondActivity : AppCompatActivity() {
         val buttonClickListener = View.OnClickListener { view ->
             if (checkResultForTicTacToe(array, player1, player2).second)
                 disableAllButtons()
-            /* sign = if (count % 2 == 0) "x"
-             else "o"*/
             if (count % 2 == 0 && count != 8) {
                 sign = "x"
                 binding.hint.text = "$player2 it's your turn"
