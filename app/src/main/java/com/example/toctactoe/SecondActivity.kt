@@ -139,11 +139,6 @@ class SecondActivity : AppCompatActivity() {
         }
         setListeners(buttonClickListener)
         binding.backBtn.setOnClickListener {
-//            val intent = Intent(this, MainActivity::class.java)
-//            intent.putExtra("player1Score", player1Score)
-//            intent.putExtra("player2Score", player2Score)
-//            startActivity(intent)
-
             val resultIntent = Intent(this, MainActivity::class.java)
             resultIntent.putExtra("player1Score", player1Score)
             resultIntent.putExtra("player2Score", player2Score)
