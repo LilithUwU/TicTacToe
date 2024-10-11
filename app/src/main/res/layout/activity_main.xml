@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="20dp"
     tools:context=".MainActivity">
 
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/game_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TicTacToe"
+        android:text="@string/tictactoe"
         android:textSize="50sp"
-
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,12 +28,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:ems="10"
-        android:hint="Player 1"
+        android:hint="@string/player_1"
         android:inputType="text"
         app:layout_constraintEnd_toStartOf="@+id/player2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/game_name" />
 
     <EditText
         android:id="@+id/player2"
@@ -42,12 +42,12 @@
         android:layout_below="@+id/player1"
         android:layout_marginTop="100dp"
         android:ems="10"
-        android:hint="Player2"
+        android:hint="@string/player2"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/player1"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/game_name" />
 
     <TextView
         android:id="@+id/scoreTv"
@@ -67,28 +67,9 @@
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:gravity="center"
-        android:text="Start"
+        android:text="@string/start"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="161dp" />
-
-
-    <!---->
-    <!--        <TextView-->
-    <!--            android:id="@+id/p1_score"-->
-    <!--            -->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_toEndOf="@+id/player1"-->
-    <!--            android:text="TextView" />-->
-
-    <!--        <TextView-->
-    <!--            android:id="@+id/p2_scoe"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_marginStart="67dp"-->
-    <!--            android:layout_toEndOf="@+id/player1"-->
-    <!--            android:text="TextView" />-->
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

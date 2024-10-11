@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
             if (player1 == "") player1 = "player1"
             if (player2 == "") player2 = "player2"
-            val intent = Intent(this, SecondActivity::class.java)
+            val intent = Intent(this, GameActivity::class.java)
             intent.putExtra("player1", player1)
             intent.putExtra("player2", player2)
             resultLauncher.launch(intent)
