@@ -5,4 +5,5 @@
     <string name="player2">Player2</string>
     <string name="start">Start</string>
     <string name="back">Back</string>
+    <string name="won">won</string>
 </resources>

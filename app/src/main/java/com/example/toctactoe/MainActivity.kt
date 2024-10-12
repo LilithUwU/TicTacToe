@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                 player2Score += data.getIntExtra("player2Score", 0)
                 binding.player1.setText(data.getStringExtra("player1").orEmpty())
                 binding.player2.setText(data.getStringExtra("player2").orEmpty())
-                binding.scoreTv.text = "$player1Score-$player2Score"
+                binding.scoreTv.text = "$player1Score - $player2Score"
             }
         }
 
