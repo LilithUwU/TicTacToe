@@ -36,18 +36,18 @@ class GameActivity : AppCompatActivity() {
             arrayOf(".", ".", ".")
         )
 
-        binding.hint.text = "$player1 it's your turn"
+        binding.hint.text = getString(R.string.it_s_your_turn, player1)
         val buttonClickListener = View.OnClickListener { view ->
             if (checkResultForTicTacToe(array).second)
                 enableBtns(false)
             if (count % 2 == 0 && count != 8) {
                 sign = "x"
-                binding.hint.text = "$player2 it's your turn"
+                binding.hint.text = getString(R.string.it_s_your_turn, player2)
             } else if (count == 8) {
-                binding.hint.text = "It's a draw"
+                binding.hint.text = getString(R.string.it_s_a_draw)
             } else {
                 sign = "o"
-                binding.hint.text = "$player1 it's your turn"
+                binding.hint.text = getString(R.string.it_s_your_turn, player1)
             }
             when (view.id) {
                 R.id.p00 -> {
@@ -55,7 +55,7 @@ class GameActivity : AppCompatActivity() {
                 }
 
                 R.id.p01 -> {
-                    handleClick(0, 1, sign, "12", findViewById(R.id.p01))
+                    handleClick(0, 1, sign, "01", findViewById(R.id.p01))
                 }
 
                 R.id.p02 -> {
