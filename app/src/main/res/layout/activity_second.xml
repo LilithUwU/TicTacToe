@@ -24,7 +24,7 @@
             android:layout_width="@dimen/cell_size"
             android:layout_height="@dimen/cell_size"
             android:layout_margin="@dimen/cell_margin"
-            android:background="@drawable/shape_cell"
+            android:background="@drawable/shape_cell_default"
             android:fontFamily="@font/adlam_display"
             
             android:textSize="@dimen/cell_text_size"
@@ -38,7 +38,7 @@
             android:layout_height="@dimen/cell_size"
             android:layout_margin="@dimen/cell_margin"
 
-            android:background="@drawable/shape_cell"
+            android:background="@drawable/shape_cell_default"
             android:fontFamily="@font/adlam_display"
             android:textSize="@dimen/cell_text_size"
             app:cornerRadius="0dp"
@@ -50,7 +50,7 @@
             android:layout_width="@dimen/cell_size"
             android:layout_height="@dimen/cell_size"
             android:layout_margin="@dimen/cell_margin"
-            android:background="@drawable/shape_cell"
+            android:background="@drawable/shape_cell_default"
 
             android:fontFamily="@font/adlam_display"
             
@@ -64,7 +64,7 @@
             android:layout_width="@dimen/cell_size"
             android:layout_height="@dimen/cell_size"
             android:layout_margin="@dimen/cell_margin"
-            android:background="@drawable/shape_cell"
+            android:background="@drawable/shape_cell_default"
 
             android:fontFamily="@font/adlam_display"
             
@@ -78,7 +78,7 @@
             android:layout_width="@dimen/cell_size"
             android:layout_height="@dimen/cell_size"
             android:layout_margin="@dimen/cell_margin"
-            android:background="@drawable/shape_cell"
+            android:background="@drawable/shape_cell_default"
 
             android:fontFamily="@font/adlam_display"
             
@@ -92,7 +92,7 @@
             android:layout_width="@dimen/cell_size"
             android:layout_height="@dimen/cell_size"
             android:layout_margin="@dimen/cell_margin"
-            android:background="@drawable/shape_cell"
+            android:background="@drawable/shape_cell_default"
 
             android:fontFamily="@font/adlam_display"
             android:textSize="@dimen/cell_text_size"
@@ -106,7 +106,7 @@
             android:layout_height="@dimen/cell_size"
             android:layout_margin="@dimen/cell_margin"
 
-            android:background="@drawable/shape_cell"
+            android:background="@drawable/shape_cell_default"
             android:fontFamily="@font/adlam_display"
             android:textSize="@dimen/cell_text_size"
             app:cornerRadius="0dp"
@@ -118,7 +118,7 @@
             android:layout_width="@dimen/cell_size"
             android:layout_height="@dimen/cell_size"
             android:layout_margin="@dimen/cell_margin"
-            android:background="@drawable/shape_cell"
+            android:background="@drawable/shape_cell_default"
 
             android:fontFamily="@font/adlam_display"
             
@@ -132,7 +132,7 @@
             android:layout_width="@dimen/cell_size"
             android:layout_height="@dimen/cell_size"
             android:layout_margin="@dimen/cell_margin"
-            android:background="@drawable/shape_cell"
+            android:background="@drawable/shape_cell_default"
             android:fontFamily="@font/adlam_display"
             
 
