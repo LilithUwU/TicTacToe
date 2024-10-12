@@ -44,7 +44,7 @@ class GameActivity : AppCompatActivity() {
                 sign = "x"
                 binding.hint.text = getString(R.string.it_s_your_turn, player2)
             } else if (count == 8) {
-                binding.hint.text = getString(R.string.it_s_a_draw)
+                binding.hint.text = "It's a draw"
             } else {
                 sign = "o"
                 binding.hint.text = getString(R.string.it_s_your_turn, player1)
