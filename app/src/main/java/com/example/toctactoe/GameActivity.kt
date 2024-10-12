@@ -21,81 +21,93 @@ class GameActivity : AppCompatActivity() {
     private lateinit var array: Array<Array<String>>
     private lateinit var player1: String
     private lateinit var player2: String
+    private lateinit var resultIntent: Intent
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        player1 = intent.getStringExtra("player1").toString()
-        player2 = intent.getStringExtra("player2").toString()
-
-        Toast.makeText(this, "$player1 & $player2", Toast.LENGTH_SHORT).show()
-        array = arrayOf(
-            arrayOf(".", ".", "."),
-            arrayOf(".", ".", "."),
-            arrayOf(".", ".", ".")
-        )
-
+        player1 = intent.getStringExtra(Constants.INTENT_PLAYER1_NAME).toString()
+        player2 = intent.getStringExtra(Constants.INTENT_PLAYER2_NAME).toString()
         binding.hint.text = getString(R.string.it_s_your_turn, player1)
+        resultIntent = Intent(this, MainActivity::class.java)
+
+        array = arrayOf(
+            arrayOf("", "", ""),
+            arrayOf("", "", ""),
+            arrayOf("", "", "")
+        )
+        Toast.makeText(this, "$player1 & $player2", Toast.LENGTH_SHORT).show()
         val buttonClickListener = View.OnClickListener { view ->
-            if (checkResultForTicTacToe(array).second)
+            if (checkGameResult(array).second)
                 enableBtns(false)
-            if (count % 2 == 0 && count != 8) {
-                sign = "x"
-                binding.hint.text = getString(R.string.it_s_your_turn, player2)
-            } else if (count == 8) {
-                binding.hint.text = "It's a draw"
-            } else {
-                sign = "o"
-                binding.hint.text = getString(R.string.it_s_your_turn, player1)
+            handleHintText()
+            handleEachBtnClickCase(view)
+        }
+        setListenersForCells(buttonClickListener)
+        binding.backBtn.setOnClickListener {
+            backBtnLogic()
+        }
+    }
+
+    private fun backBtnLogic() {
+        resultIntent.putExtra(Constants.INTENT_PLAYER1_SCORE, player1Score)
+        resultIntent.putExtra(Constants.INTENT_PLAYER2_SCORE, player2Score)
+        resultIntent.putExtra(Constants.INTENT_PLAYER1_NAME, player1)
+        resultIntent.putExtra(Constants.INTENT_PLAYER2_NAME, player2)
+        setResult(100, resultIntent)
+        finish()
+    }
+
+    private fun handleEachBtnClickCase(view: View) {
+        when (view.id) {
+            R.id.p00 -> {
+                handleClick(0, 0, sign, "00", findViewById(R.id.p00))
             }
-            when (view.id) {
-                R.id.p00 -> {
-                    handleClick(0, 0, sign, "00", findViewById(R.id.p00))
-                }
 
-                R.id.p01 -> {
-                    handleClick(0, 1, sign, "01", findViewById(R.id.p01))
-                }
+            R.id.p01 -> {
+                handleClick(0, 1, sign, "01", findViewById(R.id.p01))
+            }
 
-                R.id.p02 -> {
-                    handleClick(0, 2, sign, "02", findViewById(R.id.p02))
-                }
+            R.id.p02 -> {
+                handleClick(0, 2, sign, "02", findViewById(R.id.p02))
+            }
 
-                R.id.p10 -> {
-                    handleClick(1, 0, sign, "10", findViewById(R.id.p10))
-                }
+            R.id.p10 -> {
+                handleClick(1, 0, sign, "10", findViewById(R.id.p10))
+            }
 
-                R.id.p11 -> {
-                    handleClick(1, 1, sign, "11", findViewById(R.id.p11))
-                }
+            R.id.p11 -> {
+                handleClick(1, 1, sign, "11", findViewById(R.id.p11))
+            }
 
-                R.id.p12 -> {
-                    handleClick(1, 2, sign, "12", findViewById(R.id.p12))
-                }
+            R.id.p12 -> {
+                handleClick(1, 2, sign, "12", findViewById(R.id.p12))
+            }
 
-                R.id.p20 -> {
-                    handleClick(2, 0, sign, "20", findViewById(R.id.p20))
-                }
+            R.id.p20 -> {
+                handleClick(2, 0, sign, "20", findViewById(R.id.p20))
+            }
 
-                R.id.p21 -> {
-                    handleClick(2, 1, sign, "21", findViewById(R.id.p21))
-                }
+            R.id.p21 -> {
+                handleClick(2, 1, sign, "21", findViewById(R.id.p21))
+            }
 
-                R.id.p22 -> {
-                    handleClick(2, 2, sign, "22", findViewById(R.id.p22))
-                }
+            R.id.p22 -> {
+                handleClick(2, 2, sign, "22", findViewById(R.id.p22))
             }
         }
-        setListeners(buttonClickListener)
-        binding.backBtn.setOnClickListener {
-            val resultIntent = Intent(this, MainActivity::class.java)
-            resultIntent.putExtra("player1Score", player1Score)
-            resultIntent.putExtra("player2Score", player2Score)
-            resultIntent.putExtra("player1", player1)
-            resultIntent.putExtra("player2", player2)
-            setResult(100, resultIntent)
-            finish()
+    }
+
+    private fun handleHintText() {
+        if (count % 2 == 0 && count != 8) {
+            sign = "x"
+            binding.hint.text = getString(R.string.it_s_your_turn, player2)
+        } else if (count == 8) {
+            binding.hint.text = "It's a draw"
+        } else {
+            sign = "o"
+            binding.hint.text = getString(R.string.it_s_your_turn, player1)
         }
     }
 
@@ -105,7 +117,7 @@ class GameActivity : AppCompatActivity() {
         index = s
         count++
         view.isEnabled = false
-        checkResultForTicTacToe(array)
+        checkGameResult(array)
     }
 
     private fun checkHelperLogic(i: Int, j: Int, arr: Array<Array<String>>): Pair<String, Boolean> {
@@ -124,7 +136,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     @SuppressLint("SetTextI18n")
-    fun checkResultForTicTacToe(
+    fun checkGameResult(
         arr: Array<Array<String>>
     ): Pair<String, Boolean> {
         for (i in arr.indices) {
@@ -152,7 +164,7 @@ class GameActivity : AppCompatActivity() {
         ).forEach { it.isEnabled = state }
     }
 
-    private fun setListeners(buttonClickListener: View.OnClickListener) {
+    private fun setListenersForCells(buttonClickListener: View.OnClickListener) {
         listOf(
             binding.p00, binding.p01, binding.p02,
             binding.p10, binding.p11, binding.p12,

@@ -19,30 +19,25 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.start.setOnClickListener {
+            val intent = Intent(this, GameActivity::class.java)
             player1 = binding.player1.text.toString()
             player2 = binding.player2.text.toString()
-
-            if (player1 == "") player1 = "player1"
-            if (player2 == "") player2 = "player2"
-            val intent = Intent(this, GameActivity::class.java)
-            intent.putExtra("player1", player1)
-            intent.putExtra("player2", player2)
+            if (player1 == "") player1 = Constants.INTENT_PLAYER1_NAME
+            if (player2 == "") player2 = Constants.INTENT_PLAYER2_NAME
+            intent.putExtra(Constants.INTENT_PLAYER1_NAME, player1)
+            intent.putExtra(Constants.INTENT_PLAYER2_NAME, player2)
             resultLauncher.launch(intent)
-
         }
     }
-
-
     @SuppressLint("SetTextI18n")
     private val resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == 100) {
                 val data: Intent? = result.data
-
-                player1Score += data!!.getIntExtra("player1Score", 0)
-                player2Score += data.getIntExtra("player2Score", 0)
-                binding.player1.setText(data.getStringExtra("player1").orEmpty())
-                binding.player2.setText(data.getStringExtra("player2").orEmpty())
+                player1Score += data!!.getIntExtra(Constants.INTENT_PLAYER1_SCORE, 0)
+                player2Score += data.getIntExtra(Constants.INTENT_PLAYER2_SCORE, 0)
+                binding.player1.setText(data.getStringExtra(Constants.INTENT_PLAYER2_NAME).orEmpty())
+                binding.player2.setText(data.getStringExtra(Constants.INTENT_PLAYER2_NAME).orEmpty())
                 binding.scoreTv.text = "$player1Score - $player2Score"
             }
         }
