@@ -116,7 +116,7 @@ class GameActivity : AppCompatActivity() {
             sign = "x"
             binding.hint.text = getString(R.string.it_s_your_turn, player2)
         } else if (cellCount == 8) {
-            binding.hint.text = "It's a draw"
+            binding.hint.text = getString(R.string.it_s_a_draw)
         } else {
             sign = "o"
             binding.hint.text = getString(R.string.it_s_your_turn, player1)
