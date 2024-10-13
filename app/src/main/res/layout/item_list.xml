@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="20dp"
+    >
+    <TextView
+        android:id="@+id/tv_rating"
+        android:hint="1"
+        style="@style/style_item_textview" />
+
+    <TextView
+        android:id="@+id/tv_player_names"
+        android:hint="Alex and Leonelle"
+        style="@style/style_item_textview" />
+
+
+    <TextView
+        android:id="@+id/tv_score"
+        android:hint="17-10"
+        style="@style/style_item_textview" />
+
+    <TextView
+        android:id="@+id/tv_games_played"
+        android:hint="27"
+        style="@style/style_item_textview" />
+</LinearLayout>

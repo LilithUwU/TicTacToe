@@ -1,10 +1,11 @@
-package com.example.toctactoe
+package com.example.toctactoe.view
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.example.toctactoe.Constants
 import com.example.toctactoe.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -28,6 +29,9 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra(Constants.INTENT_PLAYER2_NAME, player2)
             resultLauncher.launch(intent)
         }
+        binding.scores.setOnClickListener{
+            resultLauncher.launch(Intent(this, ScoresActivity::class.java))
+        }
     }
     @SuppressLint("SetTextI18n")
     private val resultLauncher =
@@ -46,8 +50,6 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     override fun onResume() {
         super.onResume()
-
-
     }
 
 }

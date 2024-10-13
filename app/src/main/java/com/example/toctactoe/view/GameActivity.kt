@@ -1,15 +1,16 @@
-package com.example.toctactoe
+package com.example.toctactoe.view
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.view.DragEvent
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
+import com.example.toctactoe.Constants
+import com.example.toctactoe.R
 import com.example.toctactoe.databinding.ActivitySecondBinding
 import com.google.android.material.button.MaterialButton
 
