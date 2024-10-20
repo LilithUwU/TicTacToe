@@ -1,8 +1,8 @@
 package com.example.toctactoe.db
 
 import androidx.room.TypeConverter
-import androidx.room.TypeConverters
 import java.util.Date
+
 //To be able to save date in database
 class Converters {
 

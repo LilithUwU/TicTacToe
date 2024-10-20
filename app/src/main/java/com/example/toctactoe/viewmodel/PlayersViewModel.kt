@@ -19,7 +19,6 @@ class PlayersViewModel : ViewModel() {
     val playersDao = MainApplication.Companion.playersDatabase.getPlayersDao()
     val playersList : LiveData<List<Players>> = playersDao.getAllPlayers()
 
-    @RequiresApi(Build.VERSION_CODES.O)
     fun addPlayers(players: Players){
         viewModelScope.launch(Dispatchers.IO){
             playersDao.addPlayers(
