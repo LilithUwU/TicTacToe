@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.platform.ComposeView
 import com.example.toctactoe.Constants
 import com.example.toctactoe.databinding.ActivityMainBinding
 
@@ -19,16 +21,30 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        binding.start.setOnClickListener {
-            val intent = Intent(this, GameActivity::class.java)
-            player1 = binding.player1.text.toString()
-            player2 = binding.player2.text.toString()
-            if (player1 == "") player1 = Constants.INTENT_PLAYER1_NAME
-            if (player2 == "") player2 = Constants.INTENT_PLAYER2_NAME
-            intent.putExtra(Constants.INTENT_PLAYER1_NAME, player1)
-            intent.putExtra(Constants.INTENT_PLAYER2_NAME, player2)
-            resultLauncher.launch(intent)
+        val showDialog = mutableStateOf(false)
+         binding.composeView.setContent {
+            if (showDialog.value) {
+                CustomDialogComposable(setShowDialog = { isVisible ->
+                    showDialog.value = isVisible
+                })
+            }
         }
+        binding.btnNewGame.setOnClickListener {
+            showDialog.value = true
+        }
+
+
+
+//        binding.btnNewGame.setOnClickListener {
+//            val intent = Intent(this, GameActivity::class.java)
+//            player1 = binding.player1.text.toString()
+//            player2 = binding.player2.text.toString()
+//            if (player1 == "") player1 = Constants.INTENT_PLAYER1_NAME
+//            if (player2 == "") player2 = Constants.INTENT_PLAYER2_NAME
+//            intent.putExtra(Constants.INTENT_PLAYER1_NAME, player1)
+//            intent.putExtra(Constants.INTENT_PLAYER2_NAME, player2)
+//            resultLauncher.launch(intent)
+//        }
         binding.scores.setOnClickListener{
             resultLauncher.launch(Intent(this, ScoresActivity::class.java))
         }

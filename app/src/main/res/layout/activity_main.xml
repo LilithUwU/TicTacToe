@@ -23,8 +23,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <LinearLayout
@@ -74,17 +73,21 @@
         tools:layout_editor_absoluteY="583dp" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/start"
+        android:id="@+id/btn_new_game"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_marginTop="@dimen/margin"
         android:fontFamily="@font/adlam_display"
         android:gravity="center"
-        android:text="@string/start"
+        android:text="@string/start_new_game"
         android:textSize="@dimen/font_size"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent" />
 
+    <androidx.compose.ui.platform.ComposeView
+        android:id="@+id/composeView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/scores"
@@ -93,7 +96,7 @@
         android:layout_marginTop="@dimen/margin"
         android:fontFamily="@font/adlam_display"
         android:gravity="center"
-        android:text="@string/scores"
+        android:text="@string/game_history"
         android:textSize="@dimen/font_size"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent" />

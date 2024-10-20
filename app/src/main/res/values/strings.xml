@@ -3,10 +3,10 @@
     <string name="tictactoe">TicTacToe</string>
     <string name="player_1">Player 1</string>
     <string name="player2">Player2</string>
-    <string name="start">Start</string>
+    <string name="start_new_game">Start New Game</string>
     <string name="back">Back</string>
     <string name="won">won</string>
     <string name="it_s_your_turn">%1$s it\'s your turn</string>
     <string name="it_s_a_draw">It\'s a draw</string>
-    <string name="scores">Scores</string>
+    <string name="game_history">Game History</string>
 </resources>
