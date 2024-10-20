@@ -1,8 +1,8 @@
-#Tic-Tac-Toe Game
+# Tic-Tac-Toe Game
 
 A modern Tic-Tac-Toe game built with Kotlin, Jetpack Compose, Room Database, ViewModel, and ViewBinding. The game features score tracking, a history of previously played games, and the ability to revisit and continue games while updating scores dynamically.
 
-##Features
+## Features
 
 	•	Two-Player Game: Players can enter their names to start a new game.
 	•	Score Tracking: Player scores are updated after each match and saved.
@@ -12,12 +12,12 @@ A modern Tic-Tac-Toe game built with Kotlin, Jetpack Compose, Room Database, Vie
 	•	Room Database: Game and player data (names, scores, etc.) are saved locally using Room for persistent storage.
 	•	ViewModel Architecture: Ensures data consistency across configuration changes and optimizes memory usage.
 
-##Demonstration
+## Demonstration
 
 ![ScreenRecording2024-10-20at23 43 16-ezgif com-optimize](https://github.com/user-attachments/assets/890a9adc-cfe3-411b-bcc9-48f1d7e24c89)
 
 
-##Tech Stack
+## Tech Stack
 
 	•	Kotlin: Programming language.
 	•	Jetpack Compose: For declarative UI components.
