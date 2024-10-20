@@ -1,2 +1,5 @@
-Todo: update picture after finishing database integration
-![tictactoe](https://github.com/user-attachments/assets/955cb066-cef8-49fb-aecd-e5834434dadf)
+
+
+
+https://github.com/user-attachments/assets/ea0ec1c1-ac78-4e4a-992d-4ff0b69bc501
+
