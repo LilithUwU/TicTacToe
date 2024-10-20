@@ -1,4 +1,4 @@
-package com.example.toctactoe
+package com.example.toctactoe.model
 
 
 import androidx.room.Entity

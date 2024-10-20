@@ -31,8 +31,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.toctactoe.Players
-import com.example.toctactoe.PlayersViewModel
+import com.example.toctactoe.model.Players
+import com.example.toctactoe.viewmodel.PlayersViewModel
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.util.Date

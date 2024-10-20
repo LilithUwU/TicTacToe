@@ -5,7 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.example.toctactoe.Players
+import com.example.toctactoe.model.Players
 
 
 

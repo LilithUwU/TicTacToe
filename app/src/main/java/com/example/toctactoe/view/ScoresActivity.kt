@@ -2,17 +2,12 @@ package com.example.toctactoe.view
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.core.content.pm.ShortcutInfoCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
-import com.example.toctactoe.PlayersViewModel
-import com.example.toctactoe.R
+import com.example.toctactoe.viewmodel.PlayersViewModel
 import androidx.compose.ui.Modifier
 
 
