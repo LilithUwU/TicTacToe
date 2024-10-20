@@ -5,18 +5,17 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.toctactoe.db.PlayersDatabase
 
-class MainApplication: Application() {
+class MainApplication : Application() {
     companion object {
         lateinit var playersDatabase: PlayersDatabase
     }
 
     override fun onCreate() {
         super.onCreate()
-        playersDatabase = Room.databaseBuilder(
+        playersDatabase=Room.databaseBuilder(
             applicationContext,
             PlayersDatabase::class.java,
-            PlayersDatabase.DB_NAME
+            PlayersDatabase.DATABASE_NAME
         ).build()
     }
-
 }

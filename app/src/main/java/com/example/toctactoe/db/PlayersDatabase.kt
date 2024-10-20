@@ -2,13 +2,14 @@ package com.example.toctactoe.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.toctactoe.PlayersEntity
+import androidx.room.TypeConverters
+import com.example.toctactoe.Players
 
-@Database(entities = [PlayersEntity::class], version = 1, exportSchema = false)
+@Database(entities = [Players::class], version = 1, exportSchema = true)
+@TypeConverters(Converters::class)
 abstract class PlayersDatabase : RoomDatabase() {
-    companion object {
-        const val DB_NAME = "Players_DB"
+    companion object{
+        const val DATABASE_NAME = "players_database"
     }
-
-    abstract fun getPlayersDao(): PlayersDAO
+    abstract fun getPlayersDao() : PlayersDAO
 }

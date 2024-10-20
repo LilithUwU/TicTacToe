@@ -86,19 +86,35 @@ private fun DialogContent(
     var player2 by remember { mutableStateOf("") }
     val context = LocalContext.current
     Column {
-        PlayerInputField(
+        PlayerInputFieldDialog(
             name = player1,  // Bind the current state to the TextField
             value = { player1 = it },  // Update the state on input change
             hint = "Player 1"
         )
-        PlayerInputField(
+        PlayerInputFieldDialog(
             name = player2,  // Bind the current state to the TextField
             value = { player2 = it },  // Update the state on input change
             hint = "Player 2"
         )
         Button(
             onClick = {
-                //               TODO() use dao here
+                //TODO() use dao here check if players exist if yes update else add new players
+//                val existingPlayers = playersDao.getPlayersByNames("Player A", "Player B")
+//                if (existingPlayers != null) {
+//                     updatePlayers(players)
+//                ))
+//                } else {
+//                    // Players do not exist in the same row
+//                    //  insert new players
+//                    viewModel.addPlayers(Players(
+//                    player1 = player1,
+//                    player2 = player2,
+//                    gamesPlayed = gamesPlayed,
+//                    player1Score = player1Score,
+//                    player2Score = player2Score,
+//                    id = 0,  // if auto-generated, set a default value
+//                    lastPlayed = Date.from(Instant.now())  // set the current time
+//                }
                 //initialize intent to start the game
                 val text1 = player1.toString().ifEmpty { Constants.INTENT_PLAYER1_NAME }
                 val text2 = player2.toString().ifEmpty { Constants.INTENT_PLAYER2_NAME }
@@ -140,7 +156,7 @@ private fun DialogTitle(setShowDialog: (Boolean) -> Unit) {
 }
 
 @Composable
-fun PlayerInputField(
+fun PlayerInputFieldDialog(
     name: String,
     value: (String) -> Unit,
     hint: String
