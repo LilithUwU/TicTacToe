@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.platform.ComposeView
 import com.example.toctactoe.Constants
 import com.example.toctactoe.databinding.ActivityMainBinding
 
@@ -26,7 +25,7 @@ class MainActivity : AppCompatActivity() {
             if (showDialog.value) {
                 CustomDialogComposable(setShowDialog = { isVisible ->
                     showDialog.value = isVisible
-                })
+                }, resultLauncher)
             }
         }
         binding.btnNewGame.setOnClickListener {
@@ -56,8 +55,8 @@ class MainActivity : AppCompatActivity() {
                 val data: Intent? = result.data
                 player1Score += data!!.getIntExtra(Constants.INTENT_PLAYER1_SCORE, 0)
                 player2Score += data.getIntExtra(Constants.INTENT_PLAYER2_SCORE, 0)
-                binding.player1.setText(data.getStringExtra(Constants.INTENT_PLAYER1_NAME).orEmpty())
-                binding.player2.setText(data.getStringExtra(Constants.INTENT_PLAYER2_NAME).orEmpty())
+//                binding.player1.setText(data.getStringExtra(Constants.INTENT_PLAYER1_NAME).orEmpty())
+//                binding.player2.setText(data.getStringExtra(Constants.INTENT_PLAYER2_NAME).orEmpty())
                 binding.scoreTv.text = "$player1Score - $player2Score"
             }
         }

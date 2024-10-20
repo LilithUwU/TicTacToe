@@ -1,10 +1,4 @@
 package com.example.toctactoe.view
-import com.example.toctactoe.R
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ComposableInferredTarget
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.mutableStateOf
-import com.example.toctactoe.PlayersViewModel
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,6 +15,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -34,10 +29,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.room.util.TableInfo
 import com.example.toctactoe.PlayersEntity
-import java.text.SimpleDateFormat
-import java.util.Locale
+import com.example.toctactoe.PlayersViewModel
+import com.example.toctactoe.R
+
 @Composable
 fun ScoresScreen(viewModel: PlayersViewModel){
     val playersList by viewModel.playersList.observeAsState()

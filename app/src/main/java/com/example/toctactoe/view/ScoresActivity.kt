@@ -27,6 +27,7 @@ class ScoresActivity : AppCompatActivity() {
                 color=MaterialTheme.colorScheme.background
             ){
                 ScoresScreen(playersViewModel)
+//                MainActivityScreen(playersViewModel) //fortest
             }
         }
 
