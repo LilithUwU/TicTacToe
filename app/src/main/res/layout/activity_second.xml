@@ -26,9 +26,8 @@
             android:layout_margin="@dimen/cell_margin"
             android:background="@drawable/shape_cell_default"
             android:fontFamily="@font/adlam_display"
-            
+
             android:textSize="@dimen/cell_text_size"
-            app:cornerRadius="0dp"
             app:layout_column="0"
             app:layout_row="0" />
 
@@ -41,7 +40,6 @@
             android:background="@drawable/shape_cell_default"
             android:fontFamily="@font/adlam_display"
             android:textSize="@dimen/cell_text_size"
-            app:cornerRadius="0dp"
             app:layout_column="1"
             app:layout_row="0" />
 
@@ -55,7 +53,6 @@
             android:fontFamily="@font/adlam_display"
             
             android:textSize="@dimen/cell_text_size"
-            app:cornerRadius="0dp"
             app:layout_column="2"
             app:layout_row="0" />
 
@@ -81,7 +78,7 @@
             android:background="@drawable/shape_cell_default"
 
             android:fontFamily="@font/adlam_display"
-            
+
             android:textSize="@dimen/cell_text_size"
             app:cornerRadius="0dp"
             app:layout_column="1"
@@ -121,7 +118,7 @@
             android:background="@drawable/shape_cell_default"
 
             android:fontFamily="@font/adlam_display"
-            
+
             android:textSize="@dimen/cell_text_size"
             app:cornerRadius="0dp"
             app:layout_column="1"
@@ -134,7 +131,7 @@
             android:layout_margin="@dimen/cell_margin"
             android:background="@drawable/shape_cell_default"
             android:fontFamily="@font/adlam_display"
-            
+
 
             android:textSize="@dimen/cell_text_size"
             app:cornerRadius="0dp"

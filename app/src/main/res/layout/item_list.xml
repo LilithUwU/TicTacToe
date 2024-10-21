@@ -13,6 +13,7 @@
     <TextView
         android:id="@+id/tv_player_names"
         android:hint="Alex and Leonelle"
+
         style="@style/style_item_textview" />
 
 

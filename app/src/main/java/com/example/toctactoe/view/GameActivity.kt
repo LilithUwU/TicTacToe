@@ -155,9 +155,9 @@ class GameActivity : AppCompatActivity() {
             //check for rows
             if (arr[i][0] == arr[i][1] && arr[i][1] == arr[i][2]) {
                 if (checkHelperLogic(i, 0, arr).second) {
-                    cellViews[i][0].background = getDrawable(R.drawable.shape_cell_win)
-                    cellViews[i][1].background = getDrawable(R.drawable.shape_cell_win)
-                    cellViews[i][2].background = getDrawable(R.drawable.shape_cell_win)
+                    cellViews[i][0].background = greenBackground
+                    cellViews[i][1].background = greenBackground
+                    cellViews[i][2].background = greenBackground
 
                 }
                 for (row in cellViews) {
