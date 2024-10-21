@@ -81,19 +81,18 @@ private fun DialogContent(
     resultLauncher: ActivityResultLauncher<Intent>,
     setShowDialog: (Boolean) -> Unit
 ) {
-    // Use remember to create mutable state for player names
     var player1 by remember { mutableStateOf("") }
     var player2 by remember { mutableStateOf("") }
     val context = LocalContext.current
     Column {
         PlayerInputFieldDialog(
-            name = player1,  // Bind the current state to the TextField
-            value = { player1 = it },  // Update the state on input change
+            name = player1,  
+            value = { player1 = it },  
             hint = "Player 1"
         )
         PlayerInputFieldDialog(
-            name = player2,  // Bind the current state to the TextField
-            value = { player2 = it },  // Update the state on input change
+            name = player2,  
+            value = { player2 = it }, 
             hint = "Player 2"
         )
         Button(
@@ -115,7 +114,7 @@ private fun DialogContent(
 //                    id = 0,  // if auto-generated, set a default value
 //                    lastPlayed = Date.from(Instant.now())  // set the current time
 //                }
-                //initialize intent to start the game
+        
                 val text1 = player1.toString().ifEmpty { Constants.INTENT_PLAYER1_NAME }
                 val text2 = player2.toString().ifEmpty { Constants.INTENT_PLAYER2_NAME }
                 val intent = Intent(context, GameActivity::class.java).apply {

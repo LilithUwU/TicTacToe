@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.example.toctactoe.viewmodel.PlayersViewModel
 //todo redesign
 //val adlamDisplay = FontFamily(
-//    Font(R.font.adlam_display, FontWeight.Normal) // Add other weights if needed
+//    Font(R.font.adlam_display, FontWeight.Normal) 
 //)
 
 @Composable
@@ -48,7 +48,6 @@ fun MainActivityScreen(viewModel: PlayersViewModel) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewMainActivityScreen() {
-    // Create a mock or default ViewModel for preview purposes
-    val mockViewModel = PlayersViewModel() // Add mock data if needed
+    val mockViewModel = PlayersViewModel() 
     MainActivityScreen(viewModel = mockViewModel)
 }

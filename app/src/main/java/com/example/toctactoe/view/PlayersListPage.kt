@@ -58,7 +58,6 @@ fun PlayersListPage(viewModel: PlayersViewModel){
                 .padding(8.dp)
             , verticalArrangement = Arrangement.Center
         ){
-            //Add edit text and button
             PlayerInputField(name = player1, value = { player1 = it }, hint = "Player 1")
             PlayerInputField(name = player2, value = { player2 = it }, hint = "Player 2")
             PlayerInputField(name = gamesPlayed, value = { gamesPlayed = it }, hint = "Games played")
