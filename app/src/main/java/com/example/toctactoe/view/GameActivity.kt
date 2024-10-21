@@ -134,18 +134,17 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun checkHelperLogic(i: Int, j: Int, arr: Array<Array<String>>): Pair<String, Boolean> {
-        if (arr[i][j] == "x") {
-            binding.hint.text = "$player1 ${getString(R.string.won)}"
-            player1Score++
-            enableBtns(false)//disable all buttons including those that are empty and end game
-            return Pair(player1, true)
-        } else if (arr[i][j] == "o") {
-            binding.hint.text = "$player2 ${getString(R.string.won)}"
-            player2Score++
-            enableBtns(false)//disable all buttons including those that are empty and end game
-            return Pair(player2, true)
+        val player = when (arr[i][j]) {
+            "x" -> player1
+            "o" -> player2
+            else -> return Pair("Error", false)
         }
-        return Pair("Error", false)
+
+        binding.hint.text = "$player ${getString(R.string.won)}"
+        if (arr[i][j] == "x") player1Score++ else player2Score++
+
+        enableBtns(false) // disable all buttons including those that are empty and end game
+        return Pair(player, true)
     }
 
     @SuppressLint("SetTextI18n")
