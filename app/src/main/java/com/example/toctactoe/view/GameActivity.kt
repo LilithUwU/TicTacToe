@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import com.example.toctactoe.Constants
+import com.example.toctactoe.Constants.PLAYER1_X
+import com.example.toctactoe.Constants.PLAYER2_O
 import com.example.toctactoe.R
 import com.example.toctactoe.databinding.ActivitySecondBinding
 import com.google.android.material.button.MaterialButton
@@ -24,20 +26,20 @@ class GameActivity : AppCompatActivity() {
     private var index = ""
     private var sign = ""
     private lateinit var cellSignsArray: Array<Array<String>>
-    private lateinit var player1: String
-    private lateinit var player2: String
-    private lateinit var resultIntent: Intent
-    private lateinit var cellViews: Array<Array<MaterialButton>>
+    private lateinit var player1Name: String
+    private lateinit var player2Name: String
+    private lateinit var scoreCarrierIntent: Intent
+    private lateinit var cellBtnsArr: Array<Array<MaterialButton>>
     private lateinit var greenBackground: Drawable
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        resultIntent = Intent(this, MainActivity::class.java)
-        player1 = intent.getStringExtra(Constants.INTENT_PLAYER1_NAME).toString()
-        player2 = intent.getStringExtra(Constants.INTENT_PLAYER2_NAME).toString()
-        binding.hint.text = getString(R.string.it_s_your_turn, player1)
+        scoreCarrierIntent = Intent(this, MainActivity::class.java)
+        player1Name = intent.getStringExtra(Constants.INTENT_PLAYER1_NAME).toString()
+        player2Name = intent.getStringExtra(Constants.INTENT_PLAYER2_NAME).toString()
+        binding.hint.text = getString(R.string.it_s_your_turn, player1Name)
         greenBackground = AppCompatResources.getDrawable(this, R.drawable.shape_cell_win)!!
 
         cellSignsArray = arrayOf(
@@ -45,15 +47,15 @@ class GameActivity : AppCompatActivity() {
             arrayOf("", "", ""),
             arrayOf("", "", "")
         )//later will be set the and used in checking the game result
-        cellViews = arrayOf(
+        cellBtnsArr = arrayOf(
             arrayOf(binding.p00, binding.p01, binding.p02),
             arrayOf(binding.p10, binding.p11, binding.p12),
             arrayOf(binding.p20, binding.p21, binding.p22)
         )
-        Toast.makeText(this, "$player1 & $player2", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "$player1Name & $player2Name", Toast.LENGTH_SHORT).show()
         val buttonClickListener = View.OnClickListener { view ->
             if (checkGameResult(cellSignsArray).second)
-                enableBtns(false)
+                setEnableState(false)
             handleHintAndSignText() //set appropriate sign
             handleEachBtnClickCase(view)//use the sign for checking the game result
         }
@@ -64,11 +66,11 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun backBtnLogic() {
-        resultIntent.putExtra(Constants.INTENT_PLAYER1_SCORE, player1Score)
-        resultIntent.putExtra(Constants.INTENT_PLAYER2_SCORE, player2Score)
-        resultIntent.putExtra(Constants.INTENT_PLAYER1_NAME, player1)
-        resultIntent.putExtra(Constants.INTENT_PLAYER2_NAME, player2)
-        setResult(100, resultIntent)
+        scoreCarrierIntent.putExtra(Constants.INTENT_PLAYER1_SCORE, player1Score)
+        scoreCarrierIntent.putExtra(Constants.INTENT_PLAYER2_SCORE, player2Score)
+        scoreCarrierIntent.putExtra(Constants.INTENT_PLAYER1_NAME, player1Name)
+        scoreCarrierIntent.putExtra(Constants.INTENT_PLAYER2_NAME, player2Name)
+        setResult(100, scoreCarrierIntent)
         finish()
     }
 
@@ -114,13 +116,13 @@ class GameActivity : AppCompatActivity() {
 
     private fun handleHintAndSignText() {
         if (cellCount % 2 == 0 && cellCount != 8) {
-            sign = "x"
-            binding.hint.text = getString(R.string.it_s_your_turn, player2)
+            sign = PLAYER1_X
+            binding.hint.text = getString(R.string.it_s_your_turn, player2Name)
         } else if (cellCount == 8) {
             binding.hint.text = getString(R.string.it_s_a_draw)
         } else {
-            sign = "o"
-            binding.hint.text = getString(R.string.it_s_your_turn, player1)
+            sign = PLAYER2_O
+            binding.hint.text = getString(R.string.it_s_your_turn, player1Name)
         }
     }
 
@@ -135,15 +137,15 @@ class GameActivity : AppCompatActivity() {
 
     private fun checkHelperLogic(i: Int, j: Int, arr: Array<Array<String>>): Pair<String, Boolean> {
         val player = when (arr[i][j]) {
-            "x" -> player1
-            "o" -> player2
+            PLAYER1_X -> player1Name
+            PLAYER2_O -> player2Name
             else -> return Pair("Error", false)
         }
 
         binding.hint.text = "$player ${getString(R.string.won)}"
-        if (arr[i][j] == "x") player1Score++ else player2Score++
+        if (arr[i][j] == PLAYER1_X) player1Score++ else player2Score++
 
-        enableBtns(false) // disable all buttons including those that are empty and end game
+        setEnableState(false) // disable all buttons including those that are empty and end the game
         return Pair(player, true)
     }
 
@@ -155,12 +157,12 @@ class GameActivity : AppCompatActivity() {
             //check for rows
             if (arr[i][0] == arr[i][1] && arr[i][1] == arr[i][2]) {
                 if (checkHelperLogic(i, 0, arr).second) {
-                    cellViews[i][0].background = greenBackground
-                    cellViews[i][1].background = greenBackground
-                    cellViews[i][2].background = greenBackground
+                    cellBtnsArr[i][0].background = greenBackground
+                    cellBtnsArr[i][1].background = greenBackground
+                    cellBtnsArr[i][2].background = greenBackground
 
                 }
-                for (row in cellViews) {
+                for (row in cellBtnsArr) {
                     for (cell in row) {
                         cell.invalidate() // Enable or disable each cell based on the state
                     }
@@ -169,9 +171,9 @@ class GameActivity : AppCompatActivity() {
             //check for columns
             if (arr[0][i] == arr[1][i] && arr[1][i] == arr[2][i]) {
                 if (checkHelperLogic(0, i, arr).second) {
-                    cellViews[0][i].background = greenBackground
-                    cellViews[1][i].background = greenBackground
-                    cellViews[2][i].background = greenBackground
+                    cellBtnsArr[0][i].background = greenBackground
+                    cellBtnsArr[1][i].background = greenBackground
+                    cellBtnsArr[2][i].background = greenBackground
                 }
 
             }
@@ -179,23 +181,23 @@ class GameActivity : AppCompatActivity() {
         //check for diagonals
         if (arr[0][0] == arr[1][1] && arr[1][1] == arr[2][2]) {
             if (checkHelperLogic(0, 0, arr).second) {
-                cellViews[0][0].background = greenBackground
-                cellViews[1][1].background = greenBackground
-                cellViews[2][2].background = greenBackground
+                cellBtnsArr[0][0].background = greenBackground
+                cellBtnsArr[1][1].background = greenBackground
+                cellBtnsArr[2][2].background = greenBackground
             }
         }
         if (arr[0][2] == arr[1][1] && arr[1][1] == arr[2][0]) {
             if (checkHelperLogic(0, 2, arr).second) {
-                cellViews[0][2].background = greenBackground
-                cellViews[1][1].background = greenBackground
-                cellViews[2][0].background = greenBackground
+                cellBtnsArr[0][2].background = greenBackground
+                cellBtnsArr[1][1].background = greenBackground
+                cellBtnsArr[2][0].background = greenBackground
             }
         } else return Pair("Draw", false)
         return Pair("Error", false)
     }
 
-    private fun enableBtns(state: Boolean) {
-        for (row in cellViews) {
+    private fun setEnableState(state: Boolean) {
+        for (row in cellBtnsArr) {
             for (cell in row) {
                 cell.isEnabled = state // Enable or disable each cell based on the state
             }
@@ -203,7 +205,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun setListenersForCells(buttonClickListener: View.OnClickListener) {
-        for (row in cellViews) {
+        for (row in cellBtnsArr) {
             for (cell in row) {
                 cell.setOnClickListener(buttonClickListener) // Set the click listener for each cell
             }

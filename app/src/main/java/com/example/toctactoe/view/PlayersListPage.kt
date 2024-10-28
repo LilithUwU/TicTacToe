@@ -58,8 +58,8 @@ fun PlayersListPage(viewModel: PlayersViewModel){
                 .padding(8.dp)
             , verticalArrangement = Arrangement.Center
         ){
-            PlayerInputField(name = player1, value = { player1 = it }, hint = "Player 1")
-            PlayerInputField(name = player2, value = { player2 = it }, hint = "Player 2")
+            PlayerInputField(name = player1, value = { player1 = it }, hint = "Player 1 Name")
+            PlayerInputField(name = player2, value = { player2 = it }, hint = "Player 2 Name")
             PlayerInputField(name = gamesPlayed, value = { gamesPlayed = it }, hint = "Games played")
             PlayerInputField(name = player1Score, value = { player1Score = it }, hint = "Player1 Score")
             PlayerInputField(name = player2Score, value = { player2Score = it }, hint = "Player2 Score")
