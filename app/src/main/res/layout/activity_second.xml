@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".view.GameActivity">
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_restart"
+        android:layout_width="@dimen/cell_size"
+        android:layout_height="@dimen/cell_size"
+        android:background="@drawable/baseline_restart_alt_24"
+        app:layout_constraintBottom_toTopOf="@+id/backBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.02" />
+
+
 
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/grid"
@@ -15,7 +28,8 @@
         app:layout_constraintBottom_toTopOf="@+id/backBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_restart"
+        app:layout_constraintVertical_bias="0.19999999"
         app:rowCount="3">
 
 
@@ -51,7 +65,7 @@
             android:background="@drawable/shape_cell_default"
 
             android:fontFamily="@font/adlam_display"
-            
+
             android:textSize="@dimen/cell_text_size"
             app:layout_column="2"
             app:layout_row="0" />
@@ -64,7 +78,7 @@
             android:background="@drawable/shape_cell_default"
 
             android:fontFamily="@font/adlam_display"
-            
+
             android:textSize="@dimen/cell_text_size"
             app:cornerRadius="0dp"
             app:layout_column="0"
@@ -161,6 +175,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/grid" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
