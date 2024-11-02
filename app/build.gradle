@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.toctactoe'
+    namespace 'com.example.tictactoe'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.toctactoe"
+        applicationId "com.example.tictactoe"
         minSdk 26
         targetSdk = 34
         versionCode 1

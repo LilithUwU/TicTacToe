@@ -1,4 +1,4 @@
-package com.example.toctactoe.view
+package com.example.tictactoe.view
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -7,9 +7,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModelProvider
-import com.example.toctactoe.Constants
-import com.example.toctactoe.databinding.ActivityMainBinding
-import com.example.toctactoe.viewmodel.PlayersViewModel
+import com.example.tictactoe.Constants
+import com.example.tictactoe.databinding.ActivityMainBinding
+import com.example.tictactoe.viewmodel.PlayersViewModel
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy {

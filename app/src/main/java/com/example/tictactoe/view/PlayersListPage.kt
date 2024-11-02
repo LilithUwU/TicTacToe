@@ -1,4 +1,4 @@
-package com.example.toctactoe.view
+package com.example.tictactoe.view
 
 
 import androidx.compose.foundation.background
@@ -35,11 +35,11 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.toctactoe.R
-import com.example.toctactoe.model.Players
-import com.example.toctactoe.ui.theme.darkPrimaryColor
-import com.example.toctactoe.ui.theme.primaryColor
-import com.example.toctactoe.viewmodel.PlayersViewModel
+import com.example.tictactoe.R
+import com.example.tictactoe.model.Players
+import com.example.tictactoe.ui.theme.darkPrimaryColor
+import com.example.tictactoe.ui.theme.primaryColor
+import com.example.tictactoe.viewmodel.PlayersViewModel
 import java.text.SimpleDateFormat
 import java.util.Locale
 

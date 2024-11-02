@@ -1,4 +1,4 @@
-package com.example.toctactoe
+package com.example.tictactoe
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

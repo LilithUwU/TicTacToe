@@ -1,4 +1,4 @@
-package com.example.toctactoe
+package com.example.tictactoe
 
 object Constants { //todo refactor later as enum or class with private constructor
     const val INTENT_PLAYER1_SCORE="player1Score"

@@ -1,4 +1,4 @@
-package com.example.toctactoe.db
+package com.example.tictactoe.db
 
 import androidx.room.TypeConverter
 import java.util.Date

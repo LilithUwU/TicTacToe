@@ -1,4 +1,4 @@
-package com.example.toctactoe.view
+package com.example.tictactoe.view
 
 import android.R
 import android.content.Intent
@@ -13,7 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.mutableStateOf
-import com.example.toctactoe.viewmodel.PlayersViewModel
+import com.example.tictactoe.viewmodel.PlayersViewModel
 
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -39,8 +39,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
-import com.example.toctactoe.Constants
-import com.example.toctactoe.model.Players
+import com.example.tictactoe.Constants
+import com.example.tictactoe.model.Players
 import java.time.Instant
 import java.util.Date
 

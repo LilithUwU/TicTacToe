@@ -1,4 +1,4 @@
-package com.example.toctactoe
+package com.example.tictactoe
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -6,17 +6,13 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
-import com.example.toctactoe.Constants.PLAYER1_X
-import com.example.toctactoe.Constants.PLAYER2_O
-import com.example.toctactoe.databinding.ActivitySecondBinding
-import com.example.toctactoe.model.Players
-import com.example.toctactoe.viewmodel.PlayersViewModel
+import com.example.tictactoe.Constants.PLAYER1_X
+import com.example.tictactoe.Constants.PLAYER2_O
+import com.example.tictactoe.databinding.ActivitySecondBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.time.Instant
-import java.util.Date
 
 class GameUtils(
     val context: Context,

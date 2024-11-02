@@ -1,4 +1,4 @@
-package com.example.toctactoe
+package com.example.tictactoe
 
 interface GameLogic {
     fun restartGame()

@@ -1,4 +1,4 @@
-package com.example.toctactoe.view
+package com.example.tictactoe.view
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
-import com.example.toctactoe.Constants
-import com.example.toctactoe.GameUtils
-import com.example.toctactoe.R
-import com.example.toctactoe.databinding.ActivitySecondBinding
+import com.example.tictactoe.Constants
+import com.example.tictactoe.GameUtils
+import com.example.tictactoe.R
+import com.example.tictactoe.databinding.ActivitySecondBinding
 
 class GameActivity : AppCompatActivity() {
     private val binding by lazy {

@@ -1,13 +1,11 @@
-package com.example.toctactoe.viewmodel
+package com.example.tictactoe.viewmodel
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.Dispatchers
 import androidx.lifecycle.viewModelScope
-import com.example.toctactoe.MainApplication
-import com.example.toctactoe.model.Players
+import com.example.tictactoe.MainApplication
+import com.example.tictactoe.model.Players
 
 import kotlinx.coroutines.launch
 import java.time.Instant
