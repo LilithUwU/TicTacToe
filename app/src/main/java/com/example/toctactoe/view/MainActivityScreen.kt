@@ -1,4 +1,5 @@
 package com.example.toctactoe.view
+import androidx.compose.foundation.Image
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -6,9 +7,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.waterfall
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -17,6 +21,8 @@ import androidx.compose.material.icons.filled.Bolt
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Shapes
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,6 +35,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RadialGradientShader
 import androidx.compose.ui.graphics.Shader
 import androidx.compose.ui.graphics.ShaderBrush
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -164,4 +173,51 @@ fun StyleOutlinedText(text: String){
     )
 }
 
+
+//possible design of game history page, in progress
+@Preview(showBackground = true)
+@Composable
+fun PreviewScoreWinnerDialog() {
+    val mockViewModel = PlayersViewModel()
+    WinnerDialog(viewModel = mockViewModel)
+}
+
+@Composable
+fun WinnerDialog(viewModel: PlayersViewModel) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+            .background(Color.Black.copy(alpha = 0.7f)) // Optional semi-transparent overlay
+        ,
+        contentAlignment = Alignment.Center // Center the content
+    ) {
+        // Set the image as background
+        Image(
+            painter = painterResource(id = R.drawable.confetti),
+            contentDescription = "Winner Background",
+            modifier = Modifier.wrapContentSize(),
+        )
+
+        // Overlay content for your dialog
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
+        ) {
+            Text(
+                text = "Congratulations",
+                style = MaterialTheme.typography.headlineMedium,
+                color = Color.White,
+                fontSize = 30.sp,
+                fontFamily = FontFamily(Font(R.font.lemon)),
+            )
+            Text(
+                text = "Martha",
+                style = MaterialTheme.typography.headlineMedium,
+                color = Color.White,
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            )
+        }
+    }
+}
 
