@@ -21,7 +21,6 @@ class ScoresActivity : AppCompatActivity() {
                 modifier=Modifier.fillMaxSize(),
                 color=MaterialTheme.colorScheme.background
             ){
-//                MainActivityScreen(playersViewModel) //fortest
                     PlayersListPage(playersViewModel)
             }
         }

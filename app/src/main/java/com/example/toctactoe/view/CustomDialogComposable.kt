@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.mutableStateOf
+import com.example.toctactoe.viewmodel.PlayersViewModel
 
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -39,11 +40,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.example.toctactoe.Constants
+import com.example.toctactoe.model.Players
+import java.time.Instant
+import java.util.Date
 
 @Composable
 fun CustomDialogComposable(
     setShowDialog: (Boolean) -> Unit,
-    resultLauncher: ActivityResultLauncher<Intent>
+    resultLauncher: ActivityResultLauncher<Intent>,
+    viewModel: PlayersViewModel
 ) {
     Dialog(
         onDismissRequest = { setShowDialog(false) },
@@ -68,7 +73,7 @@ fun CustomDialogComposable(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        DialogContent(resultLauncher, setShowDialog)
+                        DialogContent(resultLauncher, setShowDialog, viewModel)
                     }
                 }
             }
@@ -79,7 +84,8 @@ fun CustomDialogComposable(
 @Composable
 private fun DialogContent(
     resultLauncher: ActivityResultLauncher<Intent>,
-    setShowDialog: (Boolean) -> Unit
+    setShowDialog: (Boolean) -> Unit,
+    viewModel: PlayersViewModel
 ) {
     var player1 by remember { mutableStateOf("") }
     var player2 by remember { mutableStateOf("") }
@@ -97,24 +103,15 @@ private fun DialogContent(
         )
         Button(
             onClick = {
-                //TODO() use dao here check if players exist if yes update else add new players
-//                val existingPlayers = playersDao.getPlayersByNames("Player A", "Player B")
-//                if (existingPlayers != null) {
-//                     updatePlayers(players)
-//                ))
-//                } else {
-//                    // Players do not exist in the same row
-//                    //  insert new players
-//                    viewModel.addPlayers(Players(
-//                    player1 = player1,
-//                    player2 = player2,
-//                    gamesPlayed = gamesPlayed,
-//                    player1Score = player1Score,
-//                    player2Score = player2Score,
-//                    id = 0,  // if auto-generated, set a default value
-//                    lastPlayed = Date.from(Instant.now())  // set the current time
-//                }
-        
+                viewModel.addPlayers(Players(
+                    player1 = player1,
+                    player2 = player2,
+                    gamesPlayed = "0",
+                    player1Score = "0",
+                    player2Score = "0",
+                    id = 0,
+                    lastPlayed = Date.from(Instant.now()),
+                ))
                 val text1 = player1.toString().ifEmpty { Constants.INTENT_PLAYER1_NAME }
                 val text2 = player2.toString().ifEmpty { Constants.INTENT_PLAYER2_NAME }
                 val intent = Intent(context, GameActivity::class.java).apply {

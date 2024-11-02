@@ -1,18 +1,19 @@
 Main Activity:
-    - [ ] Add logic for creating a new entry in the database from the dialog.
+    - [x] Add logic for creating a new entry in the database from the dialog.
     - [ ] Add logic for checking if opponents already exist:
         - [ ] If not, create a new entry in the database.
         - [ ] If yes, update the existing data (update score and game count).
 Game History Page:
-    - [ ] Change the game history page to display a list of previously played games.
+    - [x] Change the game history page to display a list of previously played games.
     - [ ] Add logic to handle item clicks, allowing the user to:
         - [ ] Open the selected game.
         - [ ] Update the corresponding game entry when the game finishes.
 
 Game Activity:
-    - [ ] Add a “Play Again” button and update the score in the database when the game ends.
+    - [x] Add a “Play Again” button
+    - [ ] update the score in the database when the game ends.
 
 Confetti Animation (Low Priority):
     - [ ] Add an animation dialog that displays the winner's name with confetti.
 
-Implement notification feature once daily to play the game
+Implement notification feature once, daily, to play the game

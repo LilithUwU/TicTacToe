@@ -6,8 +6,10 @@ import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.ViewModelProvider
 import com.example.toctactoe.Constants
 import com.example.toctactoe.databinding.ActivityMainBinding
+import com.example.toctactoe.viewmodel.PlayersViewModel
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy {
@@ -21,11 +23,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         val showDialog = mutableStateOf(false)
-         binding.composeView.setContent {
+        val playersViewModel = ViewModelProvider(this)[PlayersViewModel::class.java]
+
+        binding.composeView.setContent {
             if (showDialog.value) {
                 CustomDialogComposable(setShowDialog = { isVisible ->
                     showDialog.value = isVisible
-                }, resultLauncher)
+                }, resultLauncher, playersViewModel)
             }
         }
         binding.btnNewGame.setOnClickListener {

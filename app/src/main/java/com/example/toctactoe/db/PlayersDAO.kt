@@ -3,6 +3,7 @@ package com.example.toctactoe.db
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.example.toctactoe.model.Players
@@ -14,7 +15,7 @@ interface PlayersDAO {
     @Query("SELECT * FROM Players ORDER BY lastPlayed")
     fun getAllPlayers() : LiveData<List<Players>>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addPlayers(players: Players)
 
     @Query("DELETE FROM Players WHERE id = :id")
