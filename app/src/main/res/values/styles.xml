@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="style_item_textview">
+    <style name="style_item_db_value">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:fontFamily">@font/adlam_display</item>
         <item name="android:layout_weight">1</item>
         <item name="android:textSize">15sp</item>
         <item name="android:gravity">center</item>
+    </style>
+
+    <style name="style_cell_default">
+        <item name="android:layout_width">@dimen/cell_size</item>
+        <item name="android:layout_height">@dimen/cell_size</item>
+        <item name="android:layout_margin">@dimen/cell_margin</item>
+        <item name="android:background">@drawable/shape_cell_default</item>
+        <item name="android:fontFamily">@font/adlam_display</item>
+        <item name="android:textSize">@dimen/cell_text_size</item>
     </style>
 </resources>

@@ -35,120 +35,55 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/p00"
-            android:layout_width="@dimen/cell_size"
-            android:layout_height="@dimen/cell_size"
-            android:layout_margin="@dimen/cell_margin"
-            android:background="@drawable/shape_cell_default"
-            android:fontFamily="@font/adlam_display"
-
-            android:textSize="@dimen/cell_text_size"
+            style="@style/style_cell_default"
             app:layout_column="0"
             app:layout_row="0" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/p01"
-            android:layout_width="@dimen/cell_size"
-            android:layout_height="@dimen/cell_size"
-            android:layout_margin="@dimen/cell_margin"
-
-            android:background="@drawable/shape_cell_default"
-            android:fontFamily="@font/adlam_display"
-            android:textSize="@dimen/cell_text_size"
+            style="@style/style_cell_default"
             app:layout_column="1"
             app:layout_row="0" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/p02"
-            android:layout_width="@dimen/cell_size"
-            android:layout_height="@dimen/cell_size"
-            android:layout_margin="@dimen/cell_margin"
-            android:background="@drawable/shape_cell_default"
-
-            android:fontFamily="@font/adlam_display"
-
-            android:textSize="@dimen/cell_text_size"
+            style="@style/style_cell_default"
             app:layout_column="2"
             app:layout_row="0" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/p10"
-            android:layout_width="@dimen/cell_size"
-            android:layout_height="@dimen/cell_size"
-            android:layout_margin="@dimen/cell_margin"
-            android:background="@drawable/shape_cell_default"
-
-            android:fontFamily="@font/adlam_display"
-
-            android:textSize="@dimen/cell_text_size"
-            app:cornerRadius="0dp"
+            style="@style/style_cell_default"
             app:layout_column="0"
             app:layout_row="1" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/p11"
-            android:layout_width="@dimen/cell_size"
-            android:layout_height="@dimen/cell_size"
-            android:layout_margin="@dimen/cell_margin"
-            android:background="@drawable/shape_cell_default"
-
-            android:fontFamily="@font/adlam_display"
-
-            android:textSize="@dimen/cell_text_size"
-            app:cornerRadius="0dp"
+            style="@style/style_cell_default"
             app:layout_column="1"
             app:layout_row="1" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/p12"
-            android:layout_width="@dimen/cell_size"
-            android:layout_height="@dimen/cell_size"
-            android:layout_margin="@dimen/cell_margin"
-            android:background="@drawable/shape_cell_default"
-
-            android:fontFamily="@font/adlam_display"
-            android:textSize="@dimen/cell_text_size"
-            app:cornerRadius="0dp"
+            style="@style/style_cell_default"
             app:layout_column="2"
             app:layout_row="1" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/p20"
-            android:layout_width="@dimen/cell_size"
-            android:layout_height="@dimen/cell_size"
-            android:layout_margin="@dimen/cell_margin"
-
-            android:background="@drawable/shape_cell_default"
-            android:fontFamily="@font/adlam_display"
-            android:textSize="@dimen/cell_text_size"
-            app:cornerRadius="0dp"
+            style="@style/style_cell_default"
             app:layout_column="0"
             app:layout_row="2" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/p21"
-            android:layout_width="@dimen/cell_size"
-            android:layout_height="@dimen/cell_size"
-            android:layout_margin="@dimen/cell_margin"
-            android:background="@drawable/shape_cell_default"
-
-            android:fontFamily="@font/adlam_display"
-
-            android:textSize="@dimen/cell_text_size"
-            app:cornerRadius="0dp"
+            style="@style/style_cell_default"
             app:layout_column="1"
             app:layout_row="2" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/p22"
-            android:layout_width="@dimen/cell_size"
-            android:layout_height="@dimen/cell_size"
-            android:layout_margin="@dimen/cell_margin"
-            android:background="@drawable/shape_cell_default"
-            android:fontFamily="@font/adlam_display"
-
-
-            android:textSize="@dimen/cell_text_size"
-            app:cornerRadius="0dp"
+            style="@style/style_cell_default"
             app:layout_column="2"
             app:layout_row="2" />
 
@@ -159,7 +94,6 @@
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:textSize="@dimen/font_size"
-
         android:text="@string/back"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent" />

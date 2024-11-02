@@ -8,22 +8,22 @@
     <TextView
         android:id="@+id/tv_rating"
         android:hint="1"
-        style="@style/style_item_textview" />
+        style="@style/style_item_db_value" />
 
     <TextView
         android:id="@+id/tv_player_names"
         android:hint="Alex and Leonelle"
 
-        style="@style/style_item_textview" />
+        style="@style/style_item_db_value" />
 
 
     <TextView
         android:id="@+id/tv_score"
         android:hint="17-10"
-        style="@style/style_item_textview" />
+        style="@style/style_item_db_value" />
 
     <TextView
         android:id="@+id/tv_games_played"
         android:hint="27"
-        style="@style/style_item_textview" />
+        style="@style/style_item_db_value" />
 </LinearLayout>
