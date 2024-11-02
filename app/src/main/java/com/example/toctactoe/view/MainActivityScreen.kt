@@ -163,18 +163,16 @@ fun StyleOutlinedText(text: String){
     Text(
         text = text,
         modifier = Modifier
-//            .padding(5.dp) // Outer padding for spacing
             .border(
                 width = 1.dp,
                 color = Color.Black,
                 shape = RoundedCornerShape(0.dp)
             )
-            .padding(8.dp) // Inner padding to add space between the text and border
+            .padding(8.dp)
     )
 }
 
 
-//possible design of game history page, in progress
 @Preview(showBackground = true)
 @Composable
 fun PreviewScoreWinnerDialog() {
@@ -188,18 +186,16 @@ fun WinnerDialog(viewModel: PlayersViewModel) {
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
-            .background(Color.Black.copy(alpha = 0.7f)) // Optional semi-transparent overlay
+            .background(Color.Black.copy(alpha = 0.7f))
         ,
-        contentAlignment = Alignment.Center // Center the content
+        contentAlignment = Alignment.Center
     ) {
-        // Set the image as background
         Image(
             painter = painterResource(id = R.drawable.confetti),
             contentDescription = "Winner Background",
             modifier = Modifier.wrapContentSize(),
         )
 
-        // Overlay content for your dialog
         Column(
             modifier = Modifier
                 .padding(16.dp)
