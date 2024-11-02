@@ -14,3 +14,5 @@ Game Activity:
 
 Confetti Animation (Low Priority):
     - [ ] Add an animation dialog that displays the winner's name with confetti.
+
+Implement notification feature once daily to play the game
