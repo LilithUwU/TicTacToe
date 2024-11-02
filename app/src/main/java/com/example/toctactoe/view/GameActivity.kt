@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import android.window.OnBackInvokedDispatcher
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.example.toctactoe.Constants
 import com.example.toctactoe.GameUtils
@@ -36,7 +38,17 @@ class GameActivity : AppCompatActivity() {
         }
         Toast.makeText(this, "$player1Name & $player2Name", Toast.LENGTH_SHORT).show()
         binding.hint.text = getString(R.string.it_s_your_turn, player1Name)
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
+
     }
+
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            backBtnLogic()
+        }
+    }
+
+
     private fun backBtnLogic() {
         //send scores back to main activity
         scoreCarrierIntent.putExtra(Constants.INTENT_PLAYER1_SCORE, gameUtils.player1ScoreGetter)
