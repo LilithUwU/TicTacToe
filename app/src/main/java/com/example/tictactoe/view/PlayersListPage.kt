@@ -3,6 +3,7 @@ package com.example.tictactoe.view
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -139,6 +140,7 @@ fun PlayersListPage(viewModel: PlayersViewModel) {
 }
 
 fun openGame(id: Int, context: Context) {
+    Log.d("TAGTAG", "playersPage | openGame: id: $id")
     val intent = Intent(context, GameActivity::class.java).apply {
         putExtra(PLAYER_ID, id)
         putExtra(COMING_FROM, INTENT_EXTRA_HISTORY)

@@ -37,4 +37,14 @@ class PlayersViewModel : ViewModel() {
             playersDao.deletePlayers(id)
         }
     }
+
+    fun getPlayerById(id: Int): LiveData<Players> {
+        return playersDao.getPlayersById(id)
+    }
+
+    fun updateScore(id: Int, player1Score: Int, player2Score: Int){
+        viewModelScope.launch(Dispatchers.IO){
+            playersDao.deletePlayers(id)
+        }
+    }
 }
