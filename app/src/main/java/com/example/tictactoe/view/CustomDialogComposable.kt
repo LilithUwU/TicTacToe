@@ -103,15 +103,15 @@ private fun DialogContent(
         )
         Button(
             onClick = {
-                viewModel.addPlayers(Players(
-                    player1 = player1,
-                    player2 = player2,
-                    gamesPlayed = "0",
-                    player1Score = "0",
-                    player2Score = "0",
-                    id = 0,
-                    lastPlayed = Date.from(Instant.now()),
-                ))
+//                viewModel.addPlayers(Players(
+//                    player1 = player1,
+//                    player2 = player2,
+//                    gamesPlayed = "0",
+//                    player1Score = "0",
+//                    player2Score = "0",
+//                    id = 0,
+//                    lastPlayed = Date.from(Instant.now()),
+//                ))
                 val text1 = player1.toString().ifEmpty { Constants.INTENT_PLAYER1_NAME }
                 val text2 = player2.toString().ifEmpty { Constants.INTENT_PLAYER2_NAME }
                 val intent = Intent(context, GameActivity::class.java).apply {

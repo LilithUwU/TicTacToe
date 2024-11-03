@@ -1,6 +1,8 @@
 package com.example.tictactoe.view
 
 
+import android.content.Context
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -29,12 +31,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.tictactoe.Constants
+import com.example.tictactoe.Constants.COMING_FROM
+import com.example.tictactoe.Constants.INTENT_EXTRA_HISTORY
+import com.example.tictactoe.Constants.PLAYER_ID
 import com.example.tictactoe.R
 import com.example.tictactoe.model.Players
 import com.example.tictactoe.ui.theme.darkPrimaryColor
@@ -51,6 +58,9 @@ fun PlayersListPage(viewModel: PlayersViewModel) {
     var gamesPlayed by remember { mutableStateOf("") }
     var player1Score by remember { mutableStateOf("") }
     var player2Score by remember { mutableStateOf("") }
+
+    val context = LocalContext.current
+
     Column(
         modifier = Modifier
             .wrapContentSize()
@@ -63,55 +73,58 @@ fun PlayersListPage(viewModel: PlayersViewModel) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-     /*       PlayerInputField(name = player1, value = { player1 = it }, hint = "Player 1 Name")
-            PlayerInputField(name = player2, value = { player2 = it }, hint = "Player 2 Name")
-            PlayerInputField(
-                name = gamesPlayed,
-                value = { gamesPlayed = it },
-                hint = "Games played"
-            )
-            PlayerInputField(
-                name = player1Score,
-                value = { player1Score = it },
-                hint = "Player1 Score"
-            )
-            PlayerInputField(
-                name = player2Score,
-                value = { player2Score = it },
-                hint = "Player2 Score"
-            )
+            /*       PlayerInputField(name = player1, value = { player1 = it }, hint = "Player 1 Name")
+                   PlayerInputField(name = player2, value = { player2 = it }, hint = "Player 2 Name")
+                   PlayerInputField(
+                       name = gamesPlayed,
+                       value = { gamesPlayed = it },
+                       hint = "Games played"
+                   )
+                   PlayerInputField(
+                       name = player1Score,
+                       value = { player1Score = it },
+                       hint = "Player1 Score"
+                   )
+                   PlayerInputField(
+                       name = player2Score,
+                       value = { player2Score = it },
+                       hint = "Player2 Score"
+                   )
 
-            Button(onClick = {
-                viewModel.addPlayers(
-                    Players(
-                        player1 = player1,
-                        player2 = player2,
-                        gamesPlayed = gamesPlayed,
-                        player1Score = player1Score,
-                        player2Score = player2Score,
-                        id = 0,  // if auto-generated, set a default value
-                        lastPlayed = Date.from(Instant.now())  // set the current time
-                    )
-                )
-                player1 = ""
-                player2 = ""
-                gamesPlayed = ""
-                player1Score = ""
-                player2Score = ""
-            }) {
-                Text(text = "Add")
-            }*/
+                   Button(onClick = {
+                       viewModel.addPlayers(
+                           Players(
+                               player1 = player1,
+                               player2 = player2,
+                               gamesPlayed = gamesPlayed,
+                               player1Score = player1Score,
+                               player2Score = player2Score,
+                               id = 0,  // if auto-generated, set a default value
+                               lastPlayed = Date.from(Instant.now())  // set the current time
+                           )
+                       )
+                       player1 = ""
+                       player2 = ""
+                       gamesPlayed = ""
+                       player1Score = ""
+                       player2Score = ""
+                   }) {
+                       Text(text = "Add")
+                   }*/
 
-            Text(text="Game History", modifier = Modifier.padding(8.dp), fontSize = 30.sp,
+            Text(
+                text = "Game History", modifier = Modifier.padding(8.dp), fontSize = 30.sp,
                 fontFamily = FontFamily(Font(R.font.lemon)),
             )
             playersList?.let {
                 LazyColumn(
                     content = {
                         itemsIndexed(it) { index: Int, item: Players ->
-                            PlayersItem(item = item, onDelete = {
-                                viewModel.deletePlayers(item.id)
-                            })
+                            PlayersItem(
+                                item = item,
+                                onDelete = { viewModel.deletePlayers(item.id) },
+                                onContinue = { openGame(item.id, context) },
+                            )
                         }
                     }
                 )
@@ -125,9 +138,16 @@ fun PlayersListPage(viewModel: PlayersViewModel) {
     }
 }
 
+fun openGame(id: Int, context: Context) {
+    val intent = Intent(context, GameActivity::class.java).apply {
+        putExtra(PLAYER_ID, id)
+        putExtra(COMING_FROM, INTENT_EXTRA_HISTORY)
+    }
+    context.startActivity(intent)
+}
 
 @Composable
-fun PlayersItem(item: Players, onDelete: () -> Unit) {
+fun PlayersItem(item: Players, onDelete: () -> Unit, onContinue: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -140,7 +160,8 @@ fun PlayersItem(item: Players, onDelete: () -> Unit) {
                         darkPrimaryColor,
                     )
                 )
-            )            .padding(16.dp),
+            )
+            .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically
 
     ) {
@@ -158,9 +179,7 @@ fun PlayersItem(item: Players, onDelete: () -> Unit) {
                     tint = Color.White
                 )
             }
-
-
-            IconButton(onClick = onDelete /* todo: onContinue*/) {
+            IconButton(onClick = onContinue) {
                 Icon(
                     Icons.Default.PlayCircleFilled,
                     contentDescription = "Continue",
@@ -168,7 +187,6 @@ fun PlayersItem(item: Players, onDelete: () -> Unit) {
                     modifier = Modifier.size(40.dp)
                 )
             }
-
         }
 
     }
