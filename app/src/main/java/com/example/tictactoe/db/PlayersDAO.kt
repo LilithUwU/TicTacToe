@@ -25,10 +25,10 @@ interface PlayersDAO {
     @Query("SELECT * FROM players WHERE player1 = :player1 AND player2 = :player2 LIMIT 1")
     fun getPlayersByNames(player1: String, player2: String): Players?
 
-    @Query("UPDATE Players SET player1Score = :player1Score, player2Score = :player2Score WHERE id = :id")
-    fun updateScore(id: Int, player1Score: Int, player2Score: Int)
+    @Update
+    fun updatePlayers(player: Players)
 
     @Query("SELECT * FROM Players WHERE id = :id")
-    fun getPlayersById(id: Int) : LiveData<Players>
+    fun getPlayerById(id: Int): Players?
 
 }

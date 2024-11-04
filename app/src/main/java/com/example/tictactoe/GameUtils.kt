@@ -9,16 +9,21 @@ import androidx.appcompat.content.res.AppCompatResources
 import com.example.tictactoe.Constants.PLAYER1_X
 import com.example.tictactoe.Constants.PLAYER2_O
 import com.example.tictactoe.databinding.ActivitySecondBinding
+import com.example.tictactoe.model.Players
+import com.example.tictactoe.viewmodel.GameActivityViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.time.Instant
+import java.util.Date
 
 class GameUtils(
     val context: Context,
     val binding: ActivitySecondBinding,
     val player1Name: String,
     val player2Name: String,
+    val viewModel: GameActivityViewModel
 ) : GameLogic { //context, binding (for btn control),
     val player1ScoreGetter: Int
         get() = player1Score
@@ -100,15 +105,6 @@ class GameUtils(
         }
         if (arr[i][j] == PLAYER1_X) player1Score++ else player2Score++
         saveGameScore()
-//        playersViewModel.addPlayers(Players(
-//            player1 = player1Name,
-//            player2 = player2Name,
-//            gamesPlayed = "0",
-//            player1Score = player1Score.toString(),
-//            player2Score = player2Score.toString(),
-//            id = 0,
-//            lastPlayed = Date.from(Instant.now()),
-//        ))
         binding.hint.text = StringBuilder().apply {
             append(player)
             append(" ")
@@ -208,7 +204,17 @@ class GameUtils(
     }
 
     override fun saveGameScore() {
-//   TODO("Not yet implemented")
+        viewModel.addPlayers(
+            Players(
+                player1 = player1Name,
+                player2 = player2Name,
+                gamesPlayed = "0",
+                player1Score = player1Score.toString(),
+                player2Score = player2Score.toString(),
+                id = 0,
+                lastPlayed = Date.from(Instant.now()),
+            )
+        )
     }
 
 

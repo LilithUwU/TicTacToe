@@ -47,19 +47,13 @@ import com.example.tictactoe.R
 import com.example.tictactoe.model.Players
 import com.example.tictactoe.ui.theme.darkPrimaryColor
 import com.example.tictactoe.ui.theme.primaryColor
-import com.example.tictactoe.viewmodel.PlayersViewModel
+import com.example.tictactoe.viewmodel.PlayersListViewModel
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 @Composable
-fun PlayersListPage(viewModel: PlayersViewModel) {
+fun PlayersListPage(viewModel: PlayersListViewModel) {
     val playersList by viewModel.playersList.observeAsState()
-    var player1 by remember { mutableStateOf("") }
-    var player2 by remember { mutableStateOf("") }
-    var gamesPlayed by remember { mutableStateOf("") }
-    var player1Score by remember { mutableStateOf("") }
-    var player2Score by remember { mutableStateOf("") }
-
     val context = LocalContext.current
 
     Column(
@@ -74,45 +68,6 @@ fun PlayersListPage(viewModel: PlayersViewModel) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            /*       PlayerInputField(name = player1, value = { player1 = it }, hint = "Player 1 Name")
-                   PlayerInputField(name = player2, value = { player2 = it }, hint = "Player 2 Name")
-                   PlayerInputField(
-                       name = gamesPlayed,
-                       value = { gamesPlayed = it },
-                       hint = "Games played"
-                   )
-                   PlayerInputField(
-                       name = player1Score,
-                       value = { player1Score = it },
-                       hint = "Player1 Score"
-                   )
-                   PlayerInputField(
-                       name = player2Score,
-                       value = { player2Score = it },
-                       hint = "Player2 Score"
-                   )
-
-                   Button(onClick = {
-                       viewModel.addPlayers(
-                           Players(
-                               player1 = player1,
-                               player2 = player2,
-                               gamesPlayed = gamesPlayed,
-                               player1Score = player1Score,
-                               player2Score = player2Score,
-                               id = 0,  // if auto-generated, set a default value
-                               lastPlayed = Date.from(Instant.now())  // set the current time
-                           )
-                       )
-                       player1 = ""
-                       player2 = ""
-                       gamesPlayed = ""
-                       player1Score = ""
-                       player2Score = ""
-                   }) {
-                       Text(text = "Add")
-                   }*/
-
             Text(
                 text = "Game History", modifier = Modifier.padding(8.dp), fontSize = 30.sp,
                 fontFamily = FontFamily(Font(R.font.lemon)),
@@ -159,7 +114,7 @@ fun PlayersItem(item: Players, onDelete: () -> Unit, onContinue: () -> Unit) {
                 brush = Brush.linearGradient(
                     colors = listOf(
                         primaryColor,
-                        darkPrimaryColor,
+                        darkPrimaryColor
                     )
                 )
             )
@@ -236,23 +191,6 @@ private fun PlayersData(item: Players) {
         )
         Text(text = item.gamesPlayed, fontSize = 12.sp, color = Color.Yellow)
     }
-}
-
-@Composable
-fun PlayerInputField(
-    name: String,
-    value: (String) -> Unit,
-    hint: String
-) {
-    OutlinedTextField(
-        modifier = Modifier
-            .wrapContentSize()
-            .padding(5.dp),
-        value = name,
-        onValueChange = value,
-        placeholder = { Text(hint) },
-        maxLines = 1,
-    )
 }
 
 

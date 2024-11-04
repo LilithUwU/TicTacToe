@@ -40,7 +40,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.tictactoe.viewmodel.PlayersViewModel
 import com.example.tictactoe.R
 
 //todo redesign
@@ -66,7 +65,7 @@ val largeRadialGradient = object : ShaderBrush() {
 
 
 @Composable
-fun MainActivityScreen(viewModel: PlayersViewModel) {
+fun MainActivityScreen() {
     Box(modifier = Modifier
         .fillMaxSize()
         .background(largeRadialGradient)) { Column(
@@ -121,8 +120,7 @@ fun MainActivityScreen(viewModel: PlayersViewModel) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewMainActivityScreen() {
-    val mockViewModel = PlayersViewModel()
-    MainActivityScreen(viewModel = mockViewModel)
+    MainActivityScreen()
 }
 
 
@@ -130,12 +128,11 @@ fun PreviewMainActivityScreen() {
 @Preview(showBackground = true)
 @Composable
 fun PreviewScoreItemScreen() {
-    val mockViewModel = PlayersViewModel()
-    ScoreItem(viewModel = mockViewModel)
+    ScoreItem()
 }
 
 @Composable
-fun ScoreItem(viewModel: PlayersViewModel) {
+fun ScoreItem() {
     Column(
         modifier = Modifier
             .padding(10.dp)
@@ -158,7 +155,6 @@ fun StyleOutlinedText(text: String){
     Text(
         text = text,
         modifier = Modifier
-//            .padding(5.dp) // Outer padding for spacing
             .border(
                 width = 1.dp,
                 color = Color.Black,
@@ -173,12 +169,11 @@ fun StyleOutlinedText(text: String){
 @Preview(showBackground = true)
 @Composable
 fun PreviewScoreWinnerDialog() {
-    val mockViewModel = PlayersViewModel()
-    WinnerDialog(viewModel = mockViewModel)
+    WinnerDialog()
 }
 
 @Composable
-fun WinnerDialog(viewModel: PlayersViewModel) {
+fun WinnerDialog() {
     Box(
         modifier = Modifier
             .fillMaxWidth()

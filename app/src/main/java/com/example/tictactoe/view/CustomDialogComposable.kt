@@ -12,9 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.runtime.mutableStateOf
-import com.example.tictactoe.viewmodel.PlayersViewModel
-
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -26,6 +23,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -40,15 +38,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.example.tictactoe.Constants
-import com.example.tictactoe.model.Players
-import java.time.Instant
-import java.util.Date
 
 @Composable
 fun CustomDialogComposable(
     setShowDialog: (Boolean) -> Unit,
     resultLauncher: ActivityResultLauncher<Intent>,
-    viewModel: PlayersViewModel
 ) {
     Dialog(
         onDismissRequest = { setShowDialog(false) },
@@ -73,7 +67,7 @@ fun CustomDialogComposable(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        DialogContent(resultLauncher, setShowDialog, viewModel)
+                        DialogContent(resultLauncher, setShowDialog)
                     }
                 }
             }
@@ -85,7 +79,6 @@ fun CustomDialogComposable(
 private fun DialogContent(
     resultLauncher: ActivityResultLauncher<Intent>,
     setShowDialog: (Boolean) -> Unit,
-    viewModel: PlayersViewModel
 ) {
     var player1 by remember { mutableStateOf("") }
     var player2 by remember { mutableStateOf("") }
@@ -103,15 +96,6 @@ private fun DialogContent(
         )
         Button(
             onClick = {
-//                viewModel.addPlayers(Players(
-//                    player1 = player1,
-//                    player2 = player2,
-//                    gamesPlayed = "0",
-//                    player1Score = "0",
-//                    player2Score = "0",
-//                    id = 0,
-//                    lastPlayed = Date.from(Instant.now()),
-//                ))
                 val text1 = player1.toString().ifEmpty { Constants.INTENT_PLAYER1_NAME }
                 val text2 = player2.toString().ifEmpty { Constants.INTENT_PLAYER2_NAME }
                 val intent = Intent(context, GameActivity::class.java).apply {
