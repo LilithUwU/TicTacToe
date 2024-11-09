@@ -48,7 +48,7 @@ class GameUtils(
 
     fun btnClickListener() = View.OnClickListener { view ->
         if (checkGameResult().second)
-            setEnableState(false)
+            setCellsEnableState(false)
         setCellSignWhenClicked() //set appropriate sign
         handleEachBtnClickCase(view)//use the sign for checking the game result
     }
@@ -63,11 +63,11 @@ class GameUtils(
             clearCellText()
             clearSignsArray(cellSignsArray)
             clickedCellCount = 0
-            setEnableState(true)
+            setCellsEnableState(true)
         }
     }
 
-    private fun setEnableState(state: Boolean) {
+    private fun setCellsEnableState(state: Boolean) {
         for (row in cellBtnsArr) {
             for (cell in row) {
                 cell.isEnabled = state // Enable or disable each cell based on the state
@@ -110,7 +110,7 @@ class GameUtils(
             append(" ")
             append(context.getString(R.string.won))
         }.toString()
-        setEnableState(false) // disable all buttons including those that are empty and end the game
+        setCellsEnableState(false) // disable all buttons including those that are empty and end the game
         return Pair(player, true)
     }
 
@@ -208,7 +208,7 @@ class GameUtils(
             Players(
                 player1 = player1Name,
                 player2 = player2Name,
-                gamesPlayed = "0",
+                gamesPlayed = "1",
                 player1Score = player1Score.toString(),
                 player2Score = player2Score.toString(),
                 id = 0,

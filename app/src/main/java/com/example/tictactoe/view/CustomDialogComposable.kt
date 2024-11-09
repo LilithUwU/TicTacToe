@@ -101,6 +101,7 @@ private fun DialogContent(
                 val intent = Intent(context, GameActivity::class.java).apply {
                     putExtra(Constants.INTENT_PLAYER1_NAME, text1)
                     putExtra(Constants.INTENT_PLAYER2_NAME, text2)
+                    putExtra(Constants.COMING_FROM, Constants.INTENT_EXTRA_NEW_GAME)
                 }
                 resultLauncher.launch(intent)
                 setShowDialog(false)

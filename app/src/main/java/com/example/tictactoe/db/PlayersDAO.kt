@@ -29,6 +29,6 @@ interface PlayersDAO {
     fun updatePlayers(player: Players)
 
     @Query("SELECT * FROM Players WHERE id = :id")
-    fun getPlayerById(id: Int): Players?
+    fun getPlayerById(id: Int): LiveData<Players>
 
 }
