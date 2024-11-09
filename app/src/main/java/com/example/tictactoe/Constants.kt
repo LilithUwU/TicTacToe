@@ -11,4 +11,5 @@ object Constants { //todo refactor later as enum or class with private construct
     const val INTENT_EXTRA_HISTORY="history"
     const val PLAYER_ID="playerId"
     const val COMING_FROM="comingFrom"
+    const val TAG="TAGTAG"
 }

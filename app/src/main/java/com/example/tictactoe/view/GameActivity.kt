@@ -2,12 +2,14 @@ package com.example.tictactoe.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.tictactoe.Constants
 import com.example.tictactoe.Constants.INTENT_PLAYER1_NAME
 import com.example.tictactoe.Constants.INTENT_PLAYER2_NAME
+import com.example.tictactoe.Constants.TAG
 import com.example.tictactoe.GameUtils
 import com.example.tictactoe.R
 import com.example.tictactoe.databinding.ActivitySecondBinding
@@ -46,8 +48,19 @@ class GameActivity : AppCompatActivity() {
 
             Constants.INTENT_EXTRA_HISTORY -> {
                 val playerId = intent.getIntExtra(Constants.PLAYER_ID, 0)
-                player1Name = gameViewModel.getPlayersById(playerId).value?.player1.toString()
-                player2Name = gameViewModel.getPlayersById(playerId).value?.player2.toString()
+                player1Name = ""
+                player2Name = ""
+
+                gameViewModel.getPlayer(playerId) { player ->
+                    Log.d(TAG, "getPlayer: $player")
+                    Log.d(TAG, "getPlayer: $player1Name")
+                    Log.d(TAG, "getPlayer: $player2Name")
+                    player1Name = player.player1
+                    player2Name = player.player2
+                    Log.d(TAG, "getPlayer: $player1Name")
+                    Log.d(TAG, "getPlayer: $player2Name")
+
+                }
             }
 
             else -> {

@@ -8,6 +8,7 @@ import com.example.tictactoe.MainApplication
 import com.example.tictactoe.model.Players
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.time.Instant
 import java.util.Date
 import kotlin.collections.List
@@ -46,9 +47,12 @@ class GameActivityViewModel : ViewModel() {
         }
     }
 
-    fun getPlayersById(id: Int): LiveData<Players> {
-        Log.d("TAGTAG", "getPlayersById: id:$id  ${playersDao.getPlayerById(id).value?.player1}")
-        return playersDao.getPlayerById(id)
+    fun getPlayer(id: Int, callback: (Players) -> Unit) {
+        viewModelScope.launch {
+            val player = withContext(Dispatchers.IO) { playersDao.getPlayer(id) }
+//            Log.d(Constants.TAG, "getPlayer: $player")
+            callback(player)
+        }
     }
 
 }
