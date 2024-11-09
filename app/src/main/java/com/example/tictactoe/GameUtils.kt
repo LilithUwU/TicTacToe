@@ -21,8 +21,7 @@ import java.util.Date
 class GameUtils(
     val context: Context,
     val binding: ActivitySecondBinding,
-    val player1Name: String,
-    val player2Name: String,
+    val players: Players,
     val viewModel: GameActivityViewModel
 ) : GameLogic { //context, binding (for btn control),
     val player1ScoreGetter: Int
@@ -99,8 +98,8 @@ class GameUtils(
         arr: Array<Array<String>>
     ): Pair<String, Boolean> {
         val player = when (arr[i][j]) { //get the value either x or y to know which player won
-            PLAYER1_X -> player1Name
-            PLAYER2_O -> player2Name
+            PLAYER1_X -> players.player1
+            PLAYER2_O -> players.player2
             else -> return Pair("Error", false)
         }
         if (arr[i][j] == PLAYER1_X) player1Score++ else player2Score++
@@ -204,17 +203,28 @@ class GameUtils(
     }
 
     override fun saveGameScore() {
-        viewModel.addPlayers(
-            Players(
-                player1 = player1Name,
-                player2 = player2Name,
-                gamesPlayed = "1",
-                player1Score = player1Score.toString(),
-                player2Score = player2Score.toString(),
-                id = 0,
-                lastPlayed = Date.from(Instant.now()),
-            )
-        )
+
+        viewModel.updateScore(Players(
+            id = players.id,
+            player1 = players.player1,
+            player2 = players.player2,
+            gamesPlayed = (players.gamesPlayed.toInt() + 1).toString(),
+            player1Score = player1Score.toString(),
+            player2Score = player2Score.toString(),
+            lastPlayed = Date.from(Instant.now()),
+        ))
+
+//        viewModel.addPlayers(
+//            Players(
+//                player1 = players.player1,
+//                player2 = players.player2,
+//                gamesPlayed = "1",
+//                player1Score = player1Score.toString(),
+//                player2Score = player2Score.toString(),
+//                id = 0,
+//                lastPlayed = Date.from(Instant.now()),
+//            )
+//        )
     }
 
 
@@ -230,12 +240,12 @@ class GameUtils(
         //set sign and call each player to tap on available cells
         if (clickedCellCount % 2 == 0 && clickedCellCount != 8) {
             currentlyClickedCellSign = PLAYER1_X
-            binding.hint.text = context.getString(R.string.it_s_your_turn, player2Name)
+            binding.hint.text = context.getString(R.string.it_s_your_turn, players.player2)
         } else if (clickedCellCount == 8) {
             binding.hint.text = context.getString(R.string.it_s_a_draw)
         } else {
             currentlyClickedCellSign = PLAYER2_O
-            binding.hint.text = context.getString(R.string.it_s_your_turn, player1Name)
+            binding.hint.text = context.getString(R.string.it_s_your_turn, players.player1)
         }
     }
 
