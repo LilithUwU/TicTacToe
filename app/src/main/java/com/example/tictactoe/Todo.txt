@@ -8,6 +8,7 @@ Game History Page:
     - [x] Add logic to handle item clicks, allowing the user to:
         - [x] Open the selected game.
         - [x] Update the corresponding game entry when the game finishes.
+        - [ ] Duplicate names?
 
 Game Activity:
     - [x] Add a “Play Again” button
@@ -18,5 +19,6 @@ Confetti Animation (Low Priority):
 
 [ ] Implement notification feature once, daily, to play the game
 [!] Database entity fields data type change in playerScores and gameCount from String to Int
+[!] Hint not cleared when clicking restart
 [x] Change Main Activity layout xml -> compose
 [ ] Add navigation
