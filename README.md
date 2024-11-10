@@ -14,7 +14,8 @@ A modern Tic-Tac-Toe game built with Kotlin, Jetpack Compose, Room Database, Vie
 
 ## Demonstration
 
-![ScreenRecording2024-10-20at23 43 16-ezgif com-optimize](https://github.com/user-attachments/assets/890a9adc-cfe3-411b-bcc9-48f1d7e24c89)
+![ScreenRecording2024-11-11at01 43 05-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/e88ec118-06ad-4766-9841-2fc250fce0e9)
+
 
 
 ## Tech Stack
