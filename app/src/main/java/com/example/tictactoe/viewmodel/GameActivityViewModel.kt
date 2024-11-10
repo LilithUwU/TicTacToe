@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.tictactoe.Constants
 import com.example.tictactoe.MainApplication
 import com.example.tictactoe.model.Players
 import kotlinx.coroutines.Dispatchers
@@ -34,18 +35,15 @@ class GameActivityViewModel : ViewModel() {
 
     fun updateScore(players: Players) {
         viewModelScope.launch(Dispatchers.IO) {
-            playersDao.updatePlayers(
-                Players(
-                    player1 = players.player1,
-                    player2 = players.player2,
-                    lastPlayed = Date.from(Instant.now()),
-                    gamesPlayed = players.gamesPlayed,
-                    player1Score = players.player1Score,
-                    player2Score = players.player2Score
-                )
-            )
+            Log.i(Constants.TAG, "updateScore: $players")
+
+            // Update the player record in the database
+            playersDao.updatePlayers(players)
+
+            Log.i(Constants.TAG, "Player score updated: ${players.id}")
         }
     }
+
 
     fun getPlayer(id: Int, callback: (Players) -> Unit) {
         viewModelScope.launch {

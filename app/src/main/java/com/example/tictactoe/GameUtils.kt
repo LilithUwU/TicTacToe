@@ -24,15 +24,66 @@ class GameUtils(
     val players: Players,
     val viewModel: GameActivityViewModel
 ) : GameLogic { //context, binding (for btn control),
-    val player1ScoreGetter: Int
-        get() = player1Score
 
-    val player2ScoreGetter: Int
-        get() = player2Score
-    private var player1Score = 0
-    private var player2Score = 0
+    private var player1Score = players.player1Score.toInt()
+    private var player2Score = players.player2Score.toInt()
+    private var gamesPlayed = players.gamesPlayed.toInt()
+    private var lastPlayed = players.lastPlayed
     private var clickedCellCount = 0
     private var currentlyClickedCellSign = ""
+
+
+    override fun saveGameScore() {
+        when (players.gamesPlayed) {
+            "0" -> {
+                viewModel.addPlayers(
+                    Players(
+                        player1 = players.player1,
+                        player2 = players.player2,
+                        gamesPlayed = "1",
+                        player1Score = player1Score.toString(),
+                        player2Score = player2Score.toString(),
+                        id = 0,
+                        lastPlayed = Date.from(Instant.now()),
+                    )
+                )
+            }
+            else -> {
+                viewModel.updateScore(
+                    Players(
+                        id = players.id,
+                        player1 = players.player1,
+                        player2 = players.player2,
+                        gamesPlayed = (players.gamesPlayed.toInt() + 1).toString(),
+                        player1Score = player1Score.toString(),
+                        player2Score = player2Score.toString(),
+                        lastPlayed = Date.from(Instant.now()),
+                    )
+                )
+            }
+        }
+    }
+
+    private fun handleWinningLogic(
+        i: Int,
+        j: Int,
+        arr: Array<Array<String>>
+    ): Pair<String, Boolean> {
+        val player = when (arr[i][j]) { //get the value either x or y to know which player won
+            PLAYER1_X -> players.player1
+            PLAYER2_O -> players.player2
+            else -> return Pair("Error", false)
+        }
+        if (arr[i][j] == PLAYER1_X) player1Score++ else player2Score++
+        saveGameScore()
+        binding.hint.text = StringBuilder().apply {
+            append(player)
+            append(" ")
+            append(context.getString(R.string.won))
+        }.toString()
+        setCellsEnableState(false) // disable all buttons including those that are empty and end the game
+        return Pair(player, true)
+    }
 
     val cellSignsArray = arrayOf(
         arrayOf("", "", ""),
@@ -92,26 +143,6 @@ class GameUtils(
         }
     }
 
-    private fun handleWinningLogic(
-        i: Int,
-        j: Int,
-        arr: Array<Array<String>>
-    ): Pair<String, Boolean> {
-        val player = when (arr[i][j]) { //get the value either x or y to know which player won
-            PLAYER1_X -> players.player1
-            PLAYER2_O -> players.player2
-            else -> return Pair("Error", false)
-        }
-        if (arr[i][j] == PLAYER1_X) player1Score++ else player2Score++
-        saveGameScore()
-        binding.hint.text = StringBuilder().apply {
-            append(player)
-            append(" ")
-            append(context.getString(R.string.won))
-        }.toString()
-        setCellsEnableState(false) // disable all buttons including those that are empty and end the game
-        return Pair(player, true)
-    }
 
     private fun handleEachBtnClickCase(view: View) {
         //check result for each button click
@@ -200,31 +231,6 @@ class GameUtils(
             }
         } else return Pair("Draw", false)
         return Pair("Error", false)
-    }
-
-    override fun saveGameScore() {
-
-        viewModel.updateScore(Players(
-            id = players.id,
-            player1 = players.player1,
-            player2 = players.player2,
-            gamesPlayed = (players.gamesPlayed.toInt() + 1).toString(),
-            player1Score = player1Score.toString(),
-            player2Score = player2Score.toString(),
-            lastPlayed = Date.from(Instant.now()),
-        ))
-
-//        viewModel.addPlayers(
-//            Players(
-//                player1 = players.player1,
-//                player2 = players.player2,
-//                gamesPlayed = "1",
-//                player1Score = player1Score.toString(),
-//                player2Score = player2Score.toString(),
-//                id = 0,
-//                lastPlayed = Date.from(Instant.now()),
-//            )
-//        )
     }
 
 

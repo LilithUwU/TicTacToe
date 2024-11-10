@@ -26,7 +26,7 @@ interface PlayersDAO {
     fun getPlayersByNames(player1: String, player2: String): Players?
 
     @Update
-    fun updatePlayers(player: Players)
+    suspend fun updatePlayers(player: Players)
 
     @Query("SELECT * FROM Players WHERE id = :id")
     fun getPlayer(id: Int): Players
