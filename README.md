@@ -1,6 +1,6 @@
 # Tic-Tac-Toe Game
 
-A modern Tic-Tac-Toe game built with Kotlin, Jetpack Compose, Room Database, ViewModel, and ViewBinding. The game features score tracking, a history of previously played games, and the ability to revisit and continue games while updating scores dynamically.(Work in progress)
+A modern Tic-Tac-Toe game built with Kotlin, Jetpack Compose, Room Database, ViewModel, and ViewBinding. The game features score tracking, a history of previously played games, and the ability to revisit and continue games while updating scores dynamically.
 
 ## Features
 
