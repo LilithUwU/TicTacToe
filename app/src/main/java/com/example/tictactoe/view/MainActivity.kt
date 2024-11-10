@@ -3,9 +3,13 @@ package com.example.tictactoe.view
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.ui.Modifier
 import com.example.tictactoe.Constants
 import com.example.tictactoe.databinding.ActivityMainBinding
 
@@ -17,21 +21,13 @@ class MainActivity : AppCompatActivity() {
     private var player2Score = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-        val showDialog = mutableStateOf(false)
-
-        binding.composeView.setContent {
-            if (showDialog.value) {
-                CustomDialogComposable(setShowDialog = { isVisible ->
-                    showDialog.value = isVisible
-                }, resultLauncher)
+        setContent{
+            Surface(
+                modifier=Modifier.fillMaxSize(),
+                color=MaterialTheme.colorScheme.background
+            ){
+                MainActivityScreen()
             }
-        }
-        binding.btnNewGame.setOnClickListener {
-            showDialog.value = true
-        }
-        binding.scores.setOnClickListener{
-            resultLauncher.launch(Intent(this, ScoresActivity::class.java))
         }
     }
     @SuppressLint("SetTextI18n")

@@ -1,4 +1,8 @@
 package com.example.tictactoe.view
+
+import android.content.Intent
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 
 import androidx.compose.foundation.background
@@ -32,6 +36,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RadialGradientShader
 import androidx.compose.ui.graphics.Shader
 import androidx.compose.ui.graphics.ShaderBrush
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
@@ -40,6 +45,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.tictactoe.Constants
 import com.example.tictactoe.R
 
 //todo redesign
@@ -66,55 +72,76 @@ val largeRadialGradient = object : ShaderBrush() {
 
 @Composable
 fun MainActivityScreen() {
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .background(largeRadialGradient)) { Column(
+    val context = LocalContext.current
+
+    val resultLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+    }
+
+    Box(
         modifier = Modifier
-            .padding(30.dp)
-            .fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+            .fillMaxSize()
+            .background(largeRadialGradient)
     ) {
-        Text(
-            text = "TicTacToe",
-            fontSize = 50.sp,
-            color = Color.White,
-            fontFamily = fontLemon,
-            modifier = Modifier.padding(bottom = 40.dp),
-        )
-        Button(
-            onClick = { },
-            shape = Shapes().small,
+        Column(
             modifier = Modifier
-                .wrapContentSize()
-                .padding(bottom = 10.dp)
-        ) {
-            Icon(Icons.Default.Bolt, contentDescription = null)
-            Text(
-                text = stringResource(R.string.start_new_game),
-                fontSize = 25.sp,
-                fontFamily = fontAdlamDisplay,
-
-                )
-            Icon(Icons.Default.Bolt, contentDescription = null)
-        }
-        Button(
-            onClick = { },
-            shape = Shapes().small,
-            modifier = Modifier.wrapContentSize()
+                .padding(30.dp)
+                .fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = stringResource(R.string.game_history),
-                fontFamily = fontAdlamDisplay,
-                fontSize = 25.sp,
+                text = stringResource(R.string.tictactoe),
+                fontSize = 50.sp,
+                color = Color.White,
+                fontFamily = fontLemon,
+                modifier = Modifier.padding(bottom = 40.dp),
             )
-            Icon(Icons.Default.History, contentDescription = null, Modifier.padding(start = 5.dp))
+            Button(
+                onClick = { showDialog.value = true },
+                shape = Shapes().small,
+                modifier = Modifier
+                    .wrapContentSize()
+                    .padding(bottom = 10.dp)
+            ) {
+                Icon(Icons.Default.Bolt, contentDescription = null)
+                Text(
+                    text = stringResource(R.string.new_game),
+                    fontSize = 25.sp,
+                    fontFamily = fontAdlamDisplay,
 
+                    )
+                Icon(Icons.Default.Bolt, contentDescription = null)
+            }
+            Button(
+                onClick = { resultLauncher.launch(Intent(context, ScoresActivity::class.java)) },
+                shape = Shapes().small,
+                modifier = Modifier.wrapContentSize()
+            ) {
+                Text(
+                    text = stringResource(R.string.game_history),
+                    fontFamily = fontAdlamDisplay,
+                    fontSize = 25.sp,
+                )
+                Icon(
+                    Icons.Default.History,
+                    contentDescription = null,
+                    Modifier.padding(start = 5.dp)
+                )
+            }
         }
-    } }
 
-
-
+        // Conditionally show the dialog
+        if (showDialog.value) {
+            CustomDialogComposable(
+                setShowDialog = { isVisible ->
+                    showDialog.value = isVisible  // Close dialog by changing state
+                },
+                resultLauncher = resultLauncher
+            )
+        }
+    }
 }
 
 @Preview(showBackground = true)
@@ -150,8 +177,9 @@ fun ScoreItem() {
 
     }
 }
+
 @Composable
-fun StyleOutlinedText(text: String){
+fun StyleOutlinedText(text: String) {
     Text(
         text = text,
         modifier = Modifier

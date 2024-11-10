@@ -3,6 +3,7 @@ package com.example.tictactoe.view
 import android.R
 import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -38,6 +39,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.example.tictactoe.Constants
+import com.example.tictactoe.ui.theme.lightPrimaryColor
+
 
 @Composable
 fun CustomDialogComposable(
@@ -52,6 +55,7 @@ fun CustomDialogComposable(
             color = Color.White
         ) {
             Box(
+                modifier = Modifier.background(lightPrimaryColor),
                 contentAlignment = Alignment.Center
             ) {
                 Column(modifier = Modifier.padding(20.dp)) {
@@ -85,13 +89,13 @@ private fun DialogContent(
     val context = LocalContext.current
     Column {
         PlayerInputFieldDialog(
-            name = player1,  
-            value = { player1 = it },  
+            name = player1,
+            value = { player1 = it },
             hint = "Player 1"
         )
         PlayerInputFieldDialog(
-            name = player2,  
-            value = { player2 = it }, 
+            name = player2,
+            value = { player2 = it },
             hint = "Player 2"
         )
         Button(

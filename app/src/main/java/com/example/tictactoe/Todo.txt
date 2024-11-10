@@ -18,4 +18,4 @@ Confetti Animation (Low Priority):
 
 [ ] Implement notification feature once, daily, to play the game
 [ ] Database entity fields data type change in playerScores and gameCount from String to Int
-[ ] Change Main Activity layout xml -> compose
+[x] Change Main Activity layout xml -> compose
