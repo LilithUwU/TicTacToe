@@ -17,5 +17,6 @@ Confetti Animation (Low Priority):
     - [ ] Add an animation dialog that displays the winner's name with confetti.
 
 [ ] Implement notification feature once, daily, to play the game
-[ ] Database entity fields data type change in playerScores and gameCount from String to Int
+[!] Database entity fields data type change in playerScores and gameCount from String to Int
 [x] Change Main Activity layout xml -> compose
+[ ] Add navigation
