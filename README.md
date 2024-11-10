@@ -13,8 +13,8 @@ A modern Tic-Tac-Toe game built with Kotlin, Jetpack Compose, Room Database, Vie
 	•	ViewModel Architecture: Ensures data consistency across configuration changes and optimizes memory usage.
 
 ## Demonstration
-![Uploading ScreenRecording2024-11-11at01.43.05-ezgif.com-video-to-gif-converter.gif…]()
 
+![ScreenRecording2024-11-11at01 43 05-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/e88ec118-06ad-4766-9841-2fc250fce0e9)
 
 
 
