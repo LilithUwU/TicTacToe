@@ -110,6 +110,7 @@ class GameUtils(
         binding.btnRestart.startAnimation(rotateAnimation) //clearAnimation()
         CoroutineScope(Dispatchers.Main).launch {
             delay(context.resources.getInteger(R.integer.anim_rotate_duration).toLong())
+            binding.hint.text = context.getString(R.string.it_s_your_turn, players.player1)
             clearCellText()
             clearSignsArray(cellSignsArray)
             clickedCellCount = 0

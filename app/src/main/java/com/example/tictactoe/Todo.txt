@@ -19,6 +19,6 @@ Confetti Animation (Low Priority):
 
 [ ] Implement notification feature once, daily, to play the game
 [!] Database entity fields data type change in playerScores and gameCount from String to Int
-[!] Hint not cleared when clicking restart
+[x] Hint not cleared when clicking restart
 [x] Change Main Activity layout xml -> compose
 [ ] Add navigation
