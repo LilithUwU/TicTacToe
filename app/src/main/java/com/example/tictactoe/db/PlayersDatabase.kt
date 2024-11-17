@@ -9,6 +9,7 @@ import com.example.tictactoe.model.Players
 @TypeConverters(Converters::class)
 abstract class PlayersDatabase : RoomDatabase() {
     companion object{
+        //todo change name to "match-up" when migrating
         const val DATABASE_NAME = "players_database"
     }
     abstract fun getPlayersDao() : PlayersDAO

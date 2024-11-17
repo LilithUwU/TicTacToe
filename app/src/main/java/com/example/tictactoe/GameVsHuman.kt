@@ -11,6 +11,7 @@ import com.example.tictactoe.Constants.PLAYER2_O
 import com.example.tictactoe.databinding.ActivitySecondBinding
 import com.example.tictactoe.model.Players
 import com.example.tictactoe.viewmodel.GameActivityViewModel
+import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -18,51 +19,29 @@ import kotlinx.coroutines.launch
 import java.time.Instant
 import java.util.Date
 
-class GameUtils(
+class GameVsHuman(
     val context: Context,
     val binding: ActivitySecondBinding,
     val players: Players,
     val viewModel: GameActivityViewModel
 ) : GameLogic { //context, binding (for btn control),
-
     private var player1Score = players.player1Score.toInt()
     private var player2Score = players.player2Score.toInt()
-    private var gamesPlayed = players.gamesPlayed.toInt()
-    private var lastPlayed = players.lastPlayed
     private var clickedCellCount = 0
     private var currentlyClickedCellSign = ""
-
-
-    override fun saveGameScore() {
-        when (players.gamesPlayed) {
-            "0" -> {
-                viewModel.addPlayers(
-                    Players(
-                        player1 = players.player1,
-                        player2 = players.player2,
-                        gamesPlayed = "1",
-                        player1Score = player1Score.toString(),
-                        player2Score = player2Score.toString(),
-                        id = 0,
-                        lastPlayed = Date.from(Instant.now()),
-                    )
-                )
-            }
-            else -> {
-                viewModel.updateScore(
-                    Players(
-                        id = players.id,
-                        player1 = players.player1,
-                        player2 = players.player2,
-                        gamesPlayed = (players.gamesPlayed.toInt() + 1).toString(),
-                        player1Score = player1Score.toString(),
-                        player2Score = player2Score.toString(),
-                        lastPlayed = Date.from(Instant.now()),
-                    )
-                )
-            }
-        }
-    }
+    private val greenBackground =
+        AppCompatResources.getDrawable(context, R.drawable.shape_cell_win)!!
+    private val cellIndexBindings: HashMap<Int, Triple<Int, Int, MaterialButton>> = hashMapOf(
+        R.id.p00 to Triple(0, 0, binding.p00),
+        R.id.p01 to Triple(0, 1, binding.p01),
+        R.id.p02 to Triple(0, 2, binding.p02),
+        R.id.p10 to Triple(1, 0, binding.p10),
+        R.id.p11 to Triple(1, 0, binding.p11),
+        R.id.p12 to Triple(1, 0, binding.p12),
+        R.id.p20 to Triple(2, 0, binding.p20),
+        R.id.p21 to Triple(2, 1, binding.p21),
+        R.id.p22 to Triple(2, 2, binding.p22)
+    )
 
     private fun handleWinningLogic(
         i: Int,
@@ -75,7 +54,7 @@ class GameUtils(
             else -> return Pair("Error", false)
         }
         if (arr[i][j] == PLAYER1_X) player1Score++ else player2Score++
-        saveGameScore()
+        saveScore()
         binding.hint.text = StringBuilder().apply {
             append(player)
             append(" ")
@@ -97,24 +76,18 @@ class GameUtils(
     )
 
     fun btnClickListener() = View.OnClickListener { view ->
-        if (checkGameResult().second)
+        if (getStatus().second) {
             setCellsEnableState(false)
+        }
         setCellSignWhenClicked() //set appropriate sign
         handleEachBtnClickCase(view)//use the sign for checking the game result
     }
 
-    val greenBackground = AppCompatResources.getDrawable(context, R.drawable.shape_cell_win)!!
-
-    override fun restartGame() {
-        val rotateAnimation = AnimationUtils.loadAnimation(context, R.anim.animation_rotate)
-        binding.btnRestart.startAnimation(rotateAnimation) //clearAnimation()
-        CoroutineScope(Dispatchers.Main).launch {
-            delay(context.resources.getInteger(R.integer.anim_rotate_duration).toLong())
-            binding.hint.text = context.getString(R.string.it_s_your_turn, players.player1)
-            clearCellText()
-            clearSignsArray(cellSignsArray)
-            clickedCellCount = 0
-            setCellsEnableState(true)
+    override fun setEventListeners() {
+        for (row in cellBtnsArr) {
+            for (cell in row) {
+                cell.setOnClickListener(btnClickListener()) // Set the click listener for each cell
+            }
         }
     }
 
@@ -144,46 +117,10 @@ class GameUtils(
         }
     }
 
-
     private fun handleEachBtnClickCase(view: View) {
         //check result for each button click
-        when (view.id) {
-            R.id.p00 -> {
-                handleCellClick(0, 0, currentlyClickedCellSign, binding.p00)
-            }
-
-            R.id.p01 -> {
-                handleCellClick(0, 1, currentlyClickedCellSign, binding.p01)
-            }
-
-            R.id.p02 -> {
-                handleCellClick(0, 2, currentlyClickedCellSign, binding.p02)
-            }
-
-            R.id.p10 -> {
-                handleCellClick(1, 0, currentlyClickedCellSign, binding.p10)
-            }
-
-            R.id.p11 -> {
-                handleCellClick(1, 1, currentlyClickedCellSign, binding.p11)
-            }
-
-            R.id.p12 -> {
-                handleCellClick(1, 2, currentlyClickedCellSign, binding.p12)
-            }
-
-            R.id.p20 -> {
-                handleCellClick(2, 0, currentlyClickedCellSign, binding.p20)
-            }
-
-            R.id.p21 -> {
-                handleCellClick(2, 1, currentlyClickedCellSign, binding.p21)
-            }
-
-            R.id.p22 -> {
-                handleCellClick(2, 2, currentlyClickedCellSign, binding.p22)
-            }
-        }
+        val ob = cellIndexBindings[view.id]!!
+        handleCellClick(ob.first, ob.second, currentlyClickedCellSign, ob.third)
     }
 
     fun handleCellClick(i: Int, j: Int, sign: String, view: View) {
@@ -192,11 +129,10 @@ class GameUtils(
         (view as TextView).text = sign //inits text of the button
         clickedCellCount++ //used for determining whether it's a draw or win or either players
         view.isEnabled = false //disables cell buttons
-        checkGameResult() //checks the result
+        getStatus() //checks the result
     }
 
-    @SuppressLint("SetTextI18n")
-    override fun checkGameResult(): Pair<String, Boolean> {
+    override fun getStatus(): Pair<String, Boolean> {
         for (i in cellSignsArray.indices) {
             //check for rows
             if (cellSignsArray[i][0] == cellSignsArray[i][1] && cellSignsArray[i][1] == cellSignsArray[i][2]) {
@@ -213,7 +149,6 @@ class GameUtils(
                         cellBtnsArr[k][i].background = greenBackground
                     }
                 }
-
             }
         }
         //check for diagonals
@@ -234,25 +169,51 @@ class GameUtils(
         return Pair("Error", false)
     }
 
-
-    fun setListenersForCells(buttonClickListener: View.OnClickListener) {
-        for (row in cellBtnsArr) {
-            for (cell in row) {
-                cell.setOnClickListener(buttonClickListener) // Set the click listener for each cell
-            }
+    fun setCellSignWhenClicked() {
+        //set sign and call each player to tap on available cells
+        if (clickedCellCount == 8) {
+            // Draw case
+            binding.hint.text = context.getString(R.string.it_s_a_draw)
+        } else if (clickedCellCount % 2 == 0) {
+            // Player 1's turn
+            currentlyClickedCellSign = PLAYER1_X
+            binding.hint.text = context.getString(R.string.it_s_your_turn, players.player2)
+        } else {
+            // Player 2's turn
+            currentlyClickedCellSign = PLAYER2_O
+            binding.hint.text = context.getString(R.string.it_s_your_turn, players.player1)
         }
     }
 
-    fun setCellSignWhenClicked() {
-        //set sign and call each player to tap on available cells
-        if (clickedCellCount % 2 == 0 && clickedCellCount != 8) {
-            currentlyClickedCellSign = PLAYER1_X
-            binding.hint.text = context.getString(R.string.it_s_your_turn, players.player2)
-        } else if (clickedCellCount == 8) {
-            binding.hint.text = context.getString(R.string.it_s_a_draw)
+    override fun saveScore() {
+        val matchup = Players(
+            id = 0,
+            player1 = players.player1,
+            player2 = players.player2,
+            gamesPlayed = "1",
+            player1Score = player1Score.toString(),
+            player2Score = player2Score.toString(),
+            lastPlayed = Date.from(Instant.now()),
+        )
+        if (players.gamesPlayed == "0") {
+            viewModel.addPlayers(matchup)
         } else {
-            currentlyClickedCellSign = PLAYER2_O
+            matchup.id = players.id
+            matchup.gamesPlayed = (players.gamesPlayed.toInt() + 1).toString()
+            viewModel.updateScore(matchup)
+        }
+    }
+
+    override fun restart() {
+        val rotateAnimation = AnimationUtils.loadAnimation(context, R.anim.animation_rotate)
+        binding.btnRestart.startAnimation(rotateAnimation) //clearAnimation()
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(context.resources.getInteger(R.integer.anim_rotate_duration).toLong())
             binding.hint.text = context.getString(R.string.it_s_your_turn, players.player1)
+            clearCellText()
+            clearSignsArray(cellSignsArray)
+            clickedCellCount = 0
+            setCellsEnableState(true)
         }
     }
 

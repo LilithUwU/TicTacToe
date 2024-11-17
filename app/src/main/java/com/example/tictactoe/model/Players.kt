@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import java.util.Date
 /*Table structure*/
 @Entity
-data class Players (
+data class Players ( //Matchup
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0,
     var player1: String,

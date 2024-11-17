@@ -1,7 +1,8 @@
 package com.example.tictactoe
 
 interface GameLogic {
-    fun restartGame()
-    fun checkGameResult(): Pair<String, Boolean>
-    fun saveGameScore()
+    fun restart()
+    fun getStatus(): Pair<String, Boolean>
+    fun saveScore()
+    fun setEventListeners()
 }

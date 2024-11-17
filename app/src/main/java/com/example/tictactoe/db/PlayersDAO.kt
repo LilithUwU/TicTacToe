@@ -8,8 +8,6 @@ import androidx.room.Query
 import androidx.room.Update
 import com.example.tictactoe.model.Players
 
-
-
 @Dao
 interface PlayersDAO {
     @Query("SELECT * FROM Players ORDER BY lastPlayed")
@@ -21,7 +19,6 @@ interface PlayersDAO {
     @Query("DELETE FROM Players WHERE id = :id")
     fun deletePlayers(id: Int)
 
-
     @Query("SELECT * FROM players WHERE player1 = :player1 AND player2 = :player2 LIMIT 1")
     fun getPlayersByNames(player1: String, player2: String): Players?
 
@@ -30,5 +27,4 @@ interface PlayersDAO {
 
     @Query("SELECT * FROM Players WHERE id = :id")
     fun getPlayer(id: Int): Players
-
 }

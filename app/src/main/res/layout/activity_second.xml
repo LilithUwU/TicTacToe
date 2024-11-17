@@ -30,7 +30,6 @@
         app:layout_constraintVertical_bias="0.19999999"
         app:rowCount="3">
 
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/p00"
             style="@style/style_cell_default"
@@ -84,15 +83,14 @@
             style="@style/style_cell_default"
             app:layout_column="2"
             app:layout_row="2" />
-
     </androidx.gridlayout.widget.GridLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/backBtn"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:textSize="@dimen/font_size"
         android:text="@string/back"
+        android:textSize="@dimen/font_size"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -100,15 +98,11 @@
         android:id="@+id/hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hint"       
         android:fontFamily="@font/adlam_display"
+        android:text="Hint"
         android:textSize="@dimen/font_size"
         app:layout_constraintBottom_toTopOf="@+id/backBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/grid" />
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,27 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:padding="20dp"
-    >
+    android:padding="20dp">
+
     <TextView
         android:id="@+id/tv_rating"
-        android:hint="1"
-        style="@style/style_item_db_value" />
+        style="@style/style_item_db_value"
+        android:hint="1" />
 
     <TextView
         android:id="@+id/tv_player_names"
-        android:hint="Alex and Leonelle"
-
-        style="@style/style_item_db_value" />
-
+        style="@style/style_item_db_value"
+        android:hint="Alex and Leonelle" />
 
     <TextView
         android:id="@+id/tv_score"
-        android:hint="17-10"
-        style="@style/style_item_db_value" />
+        style="@style/style_item_db_value"
+        android:hint="17-10" />
 
     <TextView
         android:id="@+id/tv_games_played"
-        android:hint="27"
-        style="@style/style_item_db_value" />
+        style="@style/style_item_db_value"
+        android:hint="27" />
 </LinearLayout>

@@ -36,21 +36,17 @@ class GameActivityViewModel : ViewModel() {
     fun updateScore(players: Players) {
         viewModelScope.launch(Dispatchers.IO) {
             Log.i(Constants.TAG, "updateScore: $players")
-
             // Update the player record in the database
             playersDao.updatePlayers(players)
-
             Log.i(Constants.TAG, "Player score updated: ${players.id}")
         }
     }
 
-
     fun getPlayer(id: Int, callback: (Players) -> Unit) {
         viewModelScope.launch {
             val player = withContext(Dispatchers.IO) { playersDao.getPlayer(id) }
-//            Log.d(Constants.TAG, "getPlayer: $player")
+            // Log.d(Constants.TAG, "getPlayer: $player")
             callback(player)
         }
     }
-
 }

@@ -10,7 +10,8 @@ import com.example.tictactoe.Constants
 import com.example.tictactoe.Constants.INTENT_PLAYER1_NAME
 import com.example.tictactoe.Constants.INTENT_PLAYER2_NAME
 import com.example.tictactoe.Constants.TAG
-import com.example.tictactoe.GameUtils
+import com.example.tictactoe.GameLogic
+import com.example.tictactoe.GameVsHuman
 import com.example.tictactoe.R
 import com.example.tictactoe.databinding.ActivitySecondBinding
 import com.example.tictactoe.model.Players
@@ -24,19 +25,17 @@ class GameActivity : AppCompatActivity() {
     }
     private lateinit var player1Name: String
     private lateinit var player2Name: String
-    private lateinit var gameUtils: GameUtils
+    private lateinit var game: GameLogic
     private lateinit var players: Players
 
-    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        val gameViewModel = ViewModelProvider(this)[GameActivityViewModel::class.java]
-        initPlayersNameByIntent(gameViewModel)
-        binding.btnRestart.setOnClickListener { gameUtils.restartGame() }
+        val viewModel = ViewModelProvider(this)[GameActivityViewModel::class.java]
+        initPlayersNameByIntent(viewModel)
+        binding.btnRestart.setOnClickListener { game.restart() }
         binding.backBtn.setOnClickListener { finish() }
     }
-
 
     private fun initPlayersNameByIntent(gameViewModel: GameActivityViewModel) {
         when (intent.getStringExtra(Constants.COMING_FROM)) {
@@ -54,8 +53,7 @@ class GameActivity : AppCompatActivity() {
                 )
                 initializeGameUtils(gameViewModel)
             }
-//todo savPlayers(boolean-boolean, players) if true->add, else update
-//  migrate db, change field types
+// todo migrate db, change field types
             Constants.INTENT_EXTRA_HISTORY -> {
                 val playerId = intent.getIntExtra(Constants.PLAYER_ID, 0)
                 player1Name = ""
@@ -68,19 +66,15 @@ class GameActivity : AppCompatActivity() {
                     players = player
                     initializeGameUtils(gameViewModel)
                 }
-
             }
-
         }
     }
 
-
     private fun initializeGameUtils(gameViewModel: GameActivityViewModel) {
-        gameUtils = GameUtils(this, binding, players, gameViewModel)
-        gameUtils.setListenersForCells(gameUtils.btnClickListener())
+        game = GameVsHuman(this, binding, players, gameViewModel)
+        game.setEventListeners()
 
         Toast.makeText(this, "$player1Name & $player2Name", Toast.LENGTH_SHORT).show()
         binding.hint.text = getString(R.string.it_s_your_turn, player1Name)
     }
-
 }
