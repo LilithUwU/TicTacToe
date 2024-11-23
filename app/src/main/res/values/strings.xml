@@ -9,4 +9,8 @@
     <string name="it_s_your_turn">%1$s it\'s your turn</string>
     <string name="it_s_a_draw">It\'s a draw</string>
     <string name="game_history">Game History</string>
+    <string name="no_items_yet">No items yet</string>
+    <string name="last_played">Last played:</string>
+    <string name="score">"Score: "</string>
+    <string name="games_played">"Games played: "</string>
 </resources>
